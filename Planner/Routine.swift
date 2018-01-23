@@ -43,4 +43,8 @@ struct Routine : Codable {
         }
     }
     
+    static func emptyRoutines() -> [Routine] {
+        return [Routine]()
+    }
+    
 }
