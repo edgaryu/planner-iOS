@@ -1,1 +1,5 @@
 # planner-iOS
+A developmental routine/habit app that helps users stick to their routines and habits through features such as preparing for their routines and allowing users to create "alternative" routines in sitautions in which they cannot stick with their usual routine.
+
+# Concept
+The app builds upon the notion of the <a href="http://charlesduhigg.com/how-habits-work/">cue-routine-reward cycle</a>, which states that cues in our environment trigger routines (or habits) that eventually lead to some sort of reward. However, unfortunate situations such as bad weather or feeling tired will oftentimes discourage an individual from following up with their routines. Bad weather may encourage people to put aside exercise for another day, which sets back their fitness goals whenever they face discouraging situations. Thus, it is best to have "alternative" routines that can still push you to your goal despite whatever life throws at you. Want to exercise more and had plans to go hiking but it's raining outside? Make an alternative routine for indoor exercises that will still help you progress towards your goals, even when facing bad weather.
