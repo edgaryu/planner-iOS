@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D411B1B2025951A002DAE02 /* RoutineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */; };
+		5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */; };
+		5D411B1F202D032B002DAE02 /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */; };
 		5DC867FF200C45DC009FF59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC867FE200C45DC009FF59F /* AppDelegate.swift */; };
 		5DC86804200C45DC009FF59F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86802200C45DC009FF59F /* Main.storyboard */; };
 		5DC86806200C45DC009FF59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86805200C45DC009FF59F /* Assets.xcassets */; };
@@ -18,8 +21,6 @@
 		5DC8681B200C57FC009FF59F /* EditActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8681A200C57FC009FF59F /* EditActionCell.swift */; };
 		5DC8681D200C775D009FF59F /* AddActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8681C200C775D009FF59F /* AddActionCell.swift */; };
 		5DC8681F200DB2E1009FF59F /* EditRoutineTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8681E200DB2E1009FF59F /* EditRoutineTitleCell.swift */; };
-		5DC86821201070F2009FF59F /* TempTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC86820201070F2009FF59F /* TempTableViewController.swift */; };
-		5DC868232010711A009FF59F /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC868222010711A009FF59F /* TempViewController.swift */; };
 		5DC8682D2011C865009FF59F /* PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8682C2011C865009FF59F /* PlannerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailViewController.swift; sourceTree = "<group>"; };
+		5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineActionTableViewController.swift; sourceTree = "<group>"; };
+		5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
 		5DC867FB200C45DC009FF59F /* Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC867FE200C45DC009FF59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DC86803200C45DC009FF59F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,8 +51,6 @@
 		5DC8681A200C57FC009FF59F /* EditActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionCell.swift; sourceTree = "<group>"; };
 		5DC8681C200C775D009FF59F /* AddActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionCell.swift; sourceTree = "<group>"; };
 		5DC8681E200DB2E1009FF59F /* EditRoutineTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutineTitleCell.swift; sourceTree = "<group>"; };
-		5DC86820201070F2009FF59F /* TempTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTableViewController.swift; sourceTree = "<group>"; };
-		5DC868222010711A009FF59F /* TempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
 		5DC8682A2011C864009FF59F /* PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8682C2011C865009FF59F /* PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerTests.swift; sourceTree = "<group>"; };
 		5DC8682E2011C865009FF59F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,15 +97,16 @@
 			children = (
 				5DC867FE200C45DC009FF59F /* AppDelegate.swift */,
 				5DC86802200C45DC009FF59F /* Main.storyboard */,
-				5DC8681C200C775D009FF59F /* AddActionCell.swift */,
-				5DC8681A200C57FC009FF59F /* EditActionCell.swift */,
-				5DC86820201070F2009FF59F /* TempTableViewController.swift */,
-				5DC868222010711A009FF59F /* TempViewController.swift */,
 				5DC86810200C46B8009FF59F /* RoutineListTableViewController.swift */,
+				5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */,
+				5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */,
+				5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */,
 				5DC86812200C489D009FF59F /* Routine.swift */,
 				5DC86814200C48D3009FF59F /* Action.swift */,
 				5DC86816200C49C4009FF59F /* AddRoutineTableViewController.swift */,
+				5DC8681A200C57FC009FF59F /* EditActionCell.swift */,
 				5DC8681E200DB2E1009FF59F /* EditRoutineTitleCell.swift */,
+				5DC8681C200C775D009FF59F /* AddActionCell.swift */,
 				5DC86805200C45DC009FF59F /* Assets.xcassets */,
 				5DC86807200C45DC009FF59F /* LaunchScreen.storyboard */,
 				5DC8680A200C45DC009FF59F /* Info.plist */,
@@ -223,15 +226,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DC86821201070F2009FF59F /* TempTableViewController.swift in Sources */,
+				5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */,
 				5DC86817200C49C4009FF59F /* AddRoutineTableViewController.swift in Sources */,
 				5DC86811200C46B8009FF59F /* RoutineListTableViewController.swift in Sources */,
+				5D411B1B2025951A002DAE02 /* RoutineDetailViewController.swift in Sources */,
 				5DC86815200C48D3009FF59F /* Action.swift in Sources */,
 				5DC8681F200DB2E1009FF59F /* EditRoutineTitleCell.swift in Sources */,
 				5DC8681B200C57FC009FF59F /* EditActionCell.swift in Sources */,
-				5DC868232010711A009FF59F /* TempViewController.swift in Sources */,
 				5DC867FF200C45DC009FF59F /* AppDelegate.swift in Sources */,
 				5DC8681D200C775D009FF59F /* AddActionCell.swift in Sources */,
+				5D411B1F202D032B002DAE02 /* ActionTableViewCell.swift in Sources */,
 				5DC86813200C489D009FF59F /* Routine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

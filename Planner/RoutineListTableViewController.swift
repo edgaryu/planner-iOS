@@ -12,6 +12,38 @@ class RoutineListTableViewController: UITableViewController {
 
     var routines = [Routine]()
     
+    // add routine alert
+    @IBAction func addRoutineButtonTapped(_ sender: UIBarButtonItem) {
+        let addRoutineAlert = UIAlertController(title: "Add new routine", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        addRoutineAlert.addTextField { (textField) in
+            textField.text = ""
+        }
+        addRoutineAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        // Successfully add new routine
+        addRoutineAlert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: { action in
+            guard let newRoutineTitle =  addRoutineAlert.textFields?.first!.text else {
+                print("Add new routine error")
+                return
+            }
+            let newRoutine = Routine(routineTitle: newRoutineTitle, actions: [Action]())
+            self.routines.append(newRoutine)
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: [IndexPath(row: self.routines.count-1, section: 0)], with: .automatic)
+                self.tableView.endUpdates()
+            }
+            
+            self.saveRoutinesToStorage()
+            
+        }))
+        self.present(addRoutineAlert, animated: true, completion: nil)
+    }
+    
+    // save routines to file
+    func saveRoutinesToStorage() {
+        Routine.saveToFile(routines: self.routines)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,52 +116,55 @@ class RoutineListTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
-//        if segue.identifier == "cancelAddRoutine" {
-//        }
         if segue.identifier == "saveAddRoutine" {
-            let addRoutineController = segue.source as! AddRoutineTableViewController
-            if let routineTitle = addRoutineController.routineTitle {
-                
+            let routineDetailController = segue.source as! RoutineDetailViewController
+            if let routineTitle = routineDetailController.routineTitle {
+
                 // editing routine
                 if let selectedIndexPath = tableView.indexPathForSelectedRow {
                     // change title, actions
                     var thisRoutine = routines[selectedIndexPath.row]
                     thisRoutine.routineTitle = routineTitle
-                    thisRoutine.actions = addRoutineController.actions
+                    thisRoutine.actions = routineDetailController.actions
                     routines[selectedIndexPath.row] = thisRoutine
                     tableView.reloadRows(at: [selectedIndexPath], with: .none)
-                    
-                // add new routine
-                } else {
-                    let newIndexPath = IndexPath(row: routines.count, section: 0)
-                    let newRoutine = Routine(routineTitle: routineTitle, actions: addRoutineController.actions)
-                    routines.append(newRoutine)
-                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+ 
                 }
+                // add new routine
+//                else {
+//                    let newIndexPath = IndexPath(row: routines.count, section: 0)
+//                    let newRoutine = Routine(routineTitle: routineTitle, actions: routineDetailController.actions)
+//                    routines.append(newRoutine)
+//                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+//                }
             }
-            Routine.saveToFile(routines: self.routines)
+            saveRoutinesToStorage()
+            
         }
+        else if segue.identifier == "deleteRoutine" {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                routines.remove(at: selectedIndexPath.row)
+                tableView.reloadData()
+            }
+            saveRoutinesToStorage()
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRoutineSegue" {
-            let addRoutineController = segue.destination
-                as! AddRoutineTableViewController
+            let routineDetailController = segue.destination
+                as! RoutineDetailViewController
             let indexPath = tableView.indexPathForSelectedRow!
             let selectedRoutine = routines[indexPath.row]
-            addRoutineController.routineTitle = selectedRoutine.routineTitle
-            addRoutineController.actions = selectedRoutine.actions
+            routineDetailController.routineTitle = selectedRoutine.routineTitle
+            routineDetailController.actions = selectedRoutine.actions
         }
     }
 

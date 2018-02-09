@@ -25,19 +25,19 @@ class AddRoutineTableViewController: UITableViewController, AddActionCellDelegat
     }
     
     func addActionButtonTapped(sender: AddActionCell, text: String) {
-        actions.append(Action(actionTitle: text, completed: false))
+//        actions.append(Action(actionTitle: text, completed: false))
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: actions.count-1, section: actionsSection)], with: .automatic)
         tableView.endUpdates()
     }
     
     func toggleActionCompletion(sender: EditActionCell) {
-        if let indexPath = tableView.indexPath(for: sender) {
-            var action = actions[indexPath.row]
-            action.completed = !action.completed
-            actions[indexPath.row] = action
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+//        if let indexPath = tableView.indexPath(for: sender) {
+//            var action = actions[indexPath.row]
+//            action.completed = !action.completed
+//            actions[indexPath.row] = action
+//            tableView.reloadRows(at8: [indexPath], with: .automatic)
+//        }
     }
     
     func deleteAction(sender: EditActionCell) {
@@ -127,7 +127,7 @@ class AddRoutineTableViewController: UITableViewController, AddActionCellDelegat
             cell.delegate = self
             
             let action = actions[indexPath.row]
-            cell.actionCompletedButton?.isSelected = action.completed
+//            cell.actionCompletedButton?.isSelected = action.completed
             cell.actionNameTextField?.text = action.actionTitle
             
             return cell
@@ -167,6 +167,7 @@ class AddRoutineTableViewController: UITableViewController, AddActionCellDelegat
     }
     */
 
+    // ?: does this change if delete button is shown on left?
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .none
     }
