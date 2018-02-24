@@ -373,8 +373,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbq-ra-CPi">
-                                <rect key="frame" x="8" y="210" width="304" height="300"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="8" y="233" width="304" height="287"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="0A7-tN-r8t" kind="embed" identifier="RoutineActionListSegue" id="buI-kc-Tty"/>
@@ -396,6 +395,9 @@
                         <constraints>
                             <constraint firstItem="9x0-5f-J1F" firstAttribute="leading" secondItem="Ygf-U3-Jsc" secondAttribute="leading" constant="8" id="09v-jx-6rx"/>
                             <constraint firstItem="V3Z-mX-xtu" firstAttribute="centerX" secondItem="IfD-YB-jaw" secondAttribute="centerX" id="1tG-5E-Xrr"/>
+                            <constraint firstItem="Ygf-U3-Jsc" firstAttribute="trailing" secondItem="pbq-ra-CPi" secondAttribute="trailing" constant="8" id="3aq-Ky-7Hu"/>
+                            <constraint firstItem="Ygf-U3-Jsc" firstAttribute="bottom" secondItem="pbq-ra-CPi" secondAttribute="bottom" constant="48" id="6RM-c9-9Tc"/>
+                            <constraint firstItem="pbq-ra-CPi" firstAttribute="leading" secondItem="Ygf-U3-Jsc" secondAttribute="leading" constant="8" id="JD9-9d-UBk"/>
                             <constraint firstItem="qD8-aI-1wp" firstAttribute="leading" secondItem="Ygf-U3-Jsc" secondAttribute="leading" constant="8" id="Kyn-c9-Y79"/>
                             <constraint firstItem="KRP-29-zzS" firstAttribute="top" secondItem="BZG-9M-dZo" secondAttribute="bottom" constant="16" id="MBV-CW-kZp"/>
                             <constraint firstItem="BZG-9M-dZo" firstAttribute="leading" secondItem="Ygf-U3-Jsc" secondAttribute="leading" constant="8" id="MaT-m9-WiM"/>
@@ -405,6 +407,7 @@
                             <constraint firstItem="9x0-5f-J1F" firstAttribute="top" secondItem="KRP-29-zzS" secondAttribute="bottom" id="a1d-VS-0fV"/>
                             <constraint firstItem="Ygf-U3-Jsc" firstAttribute="bottom" secondItem="V3Z-mX-xtu" secondAttribute="bottom" constant="8" id="eES-Pf-X9M"/>
                             <constraint firstItem="Ygf-U3-Jsc" firstAttribute="trailing" secondItem="qD8-aI-1wp" secondAttribute="trailing" constant="8" id="jFP-5W-Ofm"/>
+                            <constraint firstItem="pbq-ra-CPi" firstAttribute="top" secondItem="9x0-5f-J1F" secondAttribute="bottom" constant="16" id="npl-FG-0Yu"/>
                             <constraint firstItem="qD8-aI-1wp" firstAttribute="top" secondItem="BZG-9M-dZo" secondAttribute="bottom" constant="16" id="o02-27-0Pf"/>
                             <constraint firstItem="Ygf-U3-Jsc" firstAttribute="trailing" secondItem="BZG-9M-dZo" secondAttribute="trailing" constant="8" id="rOh-fB-tRJ"/>
                             <constraint firstItem="Ygf-U3-Jsc" firstAttribute="trailing" secondItem="9x0-5f-J1F" secondAttribute="trailing" constant="8" id="ydq-YA-R46"/>
@@ -414,7 +417,6 @@
                             <mask key="subviews">
                                 <exclude reference="qD8-aI-1wp"/>
                                 <exclude reference="YvR-Iw-U5A"/>
-                                <exclude reference="pbq-ra-CPi"/>
                                 <exclude reference="V3Z-mX-xtu"/>
                             </mask>
                         </variation>
@@ -491,7 +493,7 @@
             <objects>
                 <tableViewController id="0A7-tN-r8t" customClass="RoutineActionTableViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TDG-aD-ewN">
-                        <rect key="frame" x="0.0" y="0.0" width="304" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="287"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -588,6 +590,6 @@
         <image name="icons8-unchecked-checkbox-40" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Qn-jU-ebF"/>
+        <segue reference="Cvh-A5-wym"/>
     </inferredMetricsTieBreakers>
 </document>

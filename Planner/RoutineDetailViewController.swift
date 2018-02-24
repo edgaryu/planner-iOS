@@ -125,7 +125,6 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // press enter on text field -> add action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == actionTextField {
-            print("hi")
             handleAddRoutine()
             
             return false
