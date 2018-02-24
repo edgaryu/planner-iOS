@@ -8,34 +8,89 @@
 
 import UIKit
 
-class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate {
+//struct Constants {
+//    static let iconSize = 50
+//}
+
+class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate, IconsContainerDelegate {
+
     
     var actionTVC: RoutineActionTableViewController?
-
+    var iconsCVC: IconsCollectionViewController?
+    
+    // temp
+    var tempRoutineArray = [UIColor]()
+    
     var actions = [Action]()
     var routineTitle: String?
     var editMode = false
     
+    // NEW THIS BRANCH
+    @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var currentIcon: UIButton!
+    @IBOutlet weak var iconsContainerView: UIView!
+    @IBOutlet weak var iconsContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iconsContainerBottomConstraint: NSLayoutConstraint!
+    
+    // Icons container view
+//    @IBOutlet weak var iconsContainerView: UICollectionView!
+//    @IBOutlet weak var iconsContainerHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var iconsContainerBottomConstraint: NSLayoutConstraint!
+    let iconsContainerViewHeightWhenVisible = CGFloat(50)
+    let iconsContainerViemBottomWhenVisible = CGFloat(16)
+    //    var isIconsContainerViewHidden = false
+    
     @IBOutlet weak var actionsContainerView: UIView!
     @IBOutlet weak var deleteRoutineButton: UIButton!
     
-    // Delete routine
-    @IBAction func deleteRoutineButtonTapped(_ sender: UIButton) {
+
+    /// ---------------------
+    // ICONS: Current icon + icons contanier view
+    // ---------------------
+    
+    @IBAction func currentIconButtonTapped(_ sender: UIButton) {
+        //        isIconsContainerViewHidden = !isIconsContainerViewHidden
         
-        let deleteRoutineAlert = UIAlertController(title: "Delete this routine", message: "", preferredStyle: UIAlertControllerStyle.alert)
-        deleteRoutineAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        deleteRoutineAlert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: { (_) in
-            self.performSegue(withIdentifier: "deleteRoutine", sender: self)
-        }))
-        self.present(deleteRoutineAlert, animated: true, completion: nil)
+        if iconsContainerHeightConstraint.constant != 0 {
+            hideIconsContainerView()
+        } else {
+            unhideIconsContainerView()
+        }
+        UIView.animate(withDuration: 0.35, animations: {
+            () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func hideIconsContainerView() {
+        iconsContainerHeightConstraint.constant = 0
+        iconsContainerBottomConstraint.constant = 0
+    }
+    
+    func unhideIconsContainerView() {
+        iconsContainerBottomConstraint.constant = iconsContainerViemBottomWhenVisible
+        iconsContainerHeightConstraint.constant = iconsContainerViewHeightWhenVisible
     }
     
     
     
+    // ---------------------
     // Delegate functions
+    // ---------------------
+    
+    // Update this actions with newActions
     func updateActions(with newActions: [Action]) {
         actions = newActions
     }
+    
+    // Update this tempRoutineArray with newIcons
+    func updateIcons(with newIcons: [UIColor]) {
+        tempRoutineArray = newIcons
+    }
+    
+    // ---------------------
+    // Animations
+    // ---------------------
     
     // Button Animation for edit/add action
     func animateButton(_ sender: UIButton) {
@@ -56,24 +111,6 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // Edit actions
     // ---------------------
     @IBOutlet weak var editActionsButton: UIButton!
-    @IBAction func editActionButtonTapped(_ sender: UIButton) {
-        animateButton(sender)
-        editMode = !editMode
-        
-        
-        // Change edit mode
-        if (editMode) {
-            editActionsButton.setImage(UIImage(named: "icons8-compose-filled-40"), for: .normal)
-            actionTVC?.tableView.isEditing = true
-            
-        } else {
-            editActionsButton.setImage(UIImage(named: "icons8-compose-40"), for: .normal)
-            actionTVC?.tableView.isEditing = false
-        }
-        actionTVC?.editMode? = editMode
-        actionTVC?.tableView.reloadData()
-    
-    }
     
     // ---------------------
     // Add new action
@@ -108,38 +145,50 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         actionTextField.text = ""
     }
     
+    // ---------------------
+    // viewDidLoad()
+    // ---------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set VC title
         if (actions.count == 0 && routineTitle == nil) {
             self.title = "New Routine"
         } else {
             self.title = routineTitle
         }
 
-        // set delegate
+        // set delegates
         actionTextField.delegate = self
         
+        // ---------------------
         // Customization
+        // ---------------------
+        
+        // actionsContainer
         actionsContainerView.layer.borderWidth = 1
         actionsContainerView.layer.borderColor = UIColor.black.cgColor
         deleteRoutineButton.layer.cornerRadius = 5
+        
+        // iconsContainer
+        iconsContainerView.layer.borderWidth = 1
+        iconsContainerView.layer.borderColor = UIColor.lightGray.cgColor
+        iconsContainerView.layer.cornerRadius = 5
+        
+        // currentIcon
+        currentIcon.maskAsCircle()
+        hideIconsContainerView()
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -148,12 +197,32 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //
 //            actionTVC?.actions = actions
 //        }
-        if let vc = segue.destination as? RoutineActionTableViewController {
-            actionTVC = vc
+        if let routineActionTVCDest = segue.destination as? RoutineActionTableViewController {
+            actionTVC = routineActionTVCDest
             actionTVC?.actions = actions
             actionTVC?.delegate = self
             actionTVC?.editMode = editMode
         }
+        if let iconsCVCDest = segue.destination as? IconsCollectionViewController {
+            iconsCVC = iconsCVCDest
+            iconsCVC?.icons = tempRoutineArray
+            iconsCVC?.delegate = self
+            
+        }
     }
 
 }
+
+extension UIButton {
+    func maskAsCircle() {
+        self.contentMode = UIViewContentMode.scaleAspectFill
+        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.masksToBounds = false
+        self.clipsToBounds = true
+        
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
+}
+
+

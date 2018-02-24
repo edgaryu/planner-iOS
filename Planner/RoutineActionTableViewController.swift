@@ -22,7 +22,7 @@ class RoutineActionTableViewController: UITableViewController, ActionCellDelegat
         delegate?.updateActions(with: actions)
     }
     
-    // Delegate functions
+    // Delegate function
     func actionNameEdited(sender: ActionTableViewCell, newTitle: String) {
         if let indexPath = tableView.indexPath(for: sender) {
             var action = actions[indexPath.row]
