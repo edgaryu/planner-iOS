@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import UIKit
+
+let dataFilePath = "planner_v2"
 
 struct Routine : Codable {
     var routineTitle: String
-    var actions : [Action]
+    var subroutines : [Subroutine]
     
     // storage URL of app data
     static var archiveURL : URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let archiveURL = documentsDirectory.appendingPathComponent("planner").appendingPathExtension("plist")
+        let archiveURL = documentsDirectory.appendingPathComponent(dataFilePath).appendingPathExtension("plist")
         return archiveURL
     }
     
@@ -38,7 +41,7 @@ struct Routine : Codable {
             let retrieveData = try Data(contentsOf: archiveURL)
             return try propertyListDecoder.decode(Array<Routine>.self, from: retrieveData)
         } catch {
-            print(error)
+//            print(error)
             return [Routine]()
         }
     }
@@ -47,4 +50,34 @@ struct Routine : Codable {
         return [Routine]()
     }
     
+}
+
+struct Subroutine : Codable {
+    var iconURL : URL?
+    var desc : String?
+    var actions : [Action]
+    
+    // initialize completely empty subroutine at this index
+    init(at index: Int) {
+        iconURL = nil
+        desc = nil
+        actions = [Action]()
+    }
+    
+    // only iconURL, desc available for init
+    init(newIconURL: URL?, newDesc: String?) {
+        if let newIconURL = newIconURL {
+            iconURL = newIconURL
+        } else {
+            iconURL = nil
+        }
+        
+        if let newDesc = newDesc {
+            desc = newDesc
+        } else {
+            desc = nil
+        }
+        
+        actions = [Action]()
+    }
 }

@@ -25,7 +25,7 @@ class RoutineListTableViewController: UITableViewController {
                 print("Add new routine error")
                 return
             }
-            let newRoutine = Routine(routineTitle: newRoutineTitle, actions: [Action]())
+            let newRoutine = Routine(routineTitle: newRoutineTitle, subroutines: [Subroutine]())
             self.routines.append(newRoutine)
             DispatchQueue.main.async {
                 self.tableView.beginUpdates()
@@ -76,7 +76,7 @@ class RoutineListTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = routines[indexPath.row].routineTitle
-        cell.detailTextLabel?.text = "\(routines[indexPath.row].actions.count) actions"
+        cell.detailTextLabel?.text = "\(routines[indexPath.row].subroutines.count) subroutines"
         return cell
     }
  
@@ -123,26 +123,26 @@ class RoutineListTableViewController: UITableViewController {
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
         if segue.identifier == "saveAddRoutine" {
             let routineDetailController = segue.source as! RoutineDetailViewController
-            if let routineTitle = routineDetailController.routineTitle {
 
-                // editing routine
-                if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                    // change title, actions
-                    var thisRoutine = routines[selectedIndexPath.row]
-                    thisRoutine.routineTitle = routineTitle
-                    thisRoutine.actions = routineDetailController.actions
-                    routines[selectedIndexPath.row] = thisRoutine
-                    tableView.reloadRows(at: [selectedIndexPath], with: .none)
- 
-                }
+            // add/editing routine
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // change title, actions
+                var thisRoutine = routines[selectedIndexPath.row]
+//                thisRoutine.routineTitle = routineTitle
+                thisRoutine.subroutines = routineDetailController.subroutines
+                routines[selectedIndexPath.row] = thisRoutine
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+
+            }
                 // add new routine
+                // depr b/c add routine is only in listVC
 //                else {
 //                    let newIndexPath = IndexPath(row: routines.count, section: 0)
-//                    let newRoutine = Routine(routineTitle: routineTitle, actions: routineDetailController.actions)
+//                    let newRoutine = Routine(routineTitle: routineTitle, subroutines: routineDetailController.subroutines)
 //                    routines.append(newRoutine)
 //                    tableView.insertRows(at: [newIndexPath], with: .automatic)
 //                }
-            }
+            
             saveRoutinesToStorage()
             
         }
@@ -164,7 +164,7 @@ class RoutineListTableViewController: UITableViewController {
             let indexPath = tableView.indexPathForSelectedRow!
             let selectedRoutine = routines[indexPath.row]
             routineDetailController.routineTitle = selectedRoutine.routineTitle
-            routineDetailController.actions = selectedRoutine.actions
+            routineDetailController.subroutines = selectedRoutine.subroutines
         }
     }
 

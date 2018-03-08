@@ -13,53 +13,18 @@ import UIKit
 let iconSize = 50
 
 protocol IconsContainerDelegate: class {
-    func updateIcons(with newIcons: [UIColor])
+    func addNewSubroutine()
 }
 
 class IconsCollectionViewController: UICollectionViewController {
     
     var icons = [UIColor]()
     var delegate : IconsContainerDelegate?
+    var subroutines = [Subroutine]()
     
-    
-
     // Delegate method
     @objc func addIconButtonTapped() {
-        // popup box
-        let addColorAlert = UIAlertController(title: "Add new color", message: "", preferredStyle: UIAlertControllerStyle.alert)
-        addColorAlert.addTextField { (textField) in
-            textField.text = ""
-        }
-        addColorAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        addColorAlert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: { action in
-            guard let newColor =  addColorAlert.textFields?.first!.text else {
-                print("Add new color error")
-                return
-            }
-            var varColor : UIColor
-            switch(newColor) {
-            case "red":
-                varColor = UIColor.red
-                break
-            case "blue":
-                varColor = UIColor.blue
-                break
-            case "green":
-                varColor = UIColor.green
-                break
-            default:
-                varColor = UIColor.black
-                break
-            }
-            self.icons.append(varColor)
-            
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-                self.delegate?.updateIcons(with: self.icons)
-            }
-            
-        }))
-        self.present(addColorAlert, animated: true, completion: nil)
+        delegate?.addNewSubroutine()    
     }
     
     override func viewDidLoad() {
@@ -67,71 +32,51 @@ class IconsCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return icons.count + 1
+        return subroutines.count + 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // last collectionViewCell is the add button
-        if (indexPath.row == icons.count) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addIconCell", for: indexPath)
-            
-            let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
-            editButton.setImage(UIImage(named: "icons8-plus-math-40"), for: UIControlState.normal)
-            editButton.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
-            cell.contentView.addSubview(editButton)
-            
-            // customize cell
-            cell.maskAsCircle()
-            
-            return cell
-        }
-        // icon collection cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconCell", for: indexPath)
         
-        // customize cell
-        cell.maskAsCircle()
-        cell.contentView.backgroundColor = icons[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconCell", for: indexPath)
+        let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+        
+        // last collectionViewCell is the add button
+        if (indexPath.row == subroutines.count) {
+            editButton.setImage(UIImage(named: "icons8-plus-math-40"), for: UIControlState.normal)
+            editButton.isUserInteractionEnabled = true
+            editButton.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
+        }
+            
+        // icon collection cell
+        else {
+            // if iconURL exists
+            if let iconURL = subroutines[indexPath.row].iconURL {
+                let icon = UIImage(named: iconURL.path)
+                editButton.setImage(icon, for: UIControlState.normal)
+            }
+            editButton.isUserInteractionEnabled = false
+            
+            // if does not exist, leave blank
+        }
+        
+        editButton.maskAsCircle()
+        cell.contentView.addSubview(editButton)
+//        cell.maskAsCircle()
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        let itemsPerRow:CGFloat = 4
-        //        let hardCodedPadding:CGFloat = 5
-        //        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-        //        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
         return CGSize(width: CGFloat(iconSize), height: CGFloat(iconSize))
     }
 
@@ -168,14 +113,15 @@ class IconsCollectionViewController: UICollectionViewController {
 
 }
 
-extension UICollectionViewCell {
-    func maskAsCircle() {
-        self.contentMode = UIViewContentMode.scaleAspectFill
-        self.layer.cornerRadius = self.frame.height / 2
-        self.layer.masksToBounds = false
-        self.clipsToBounds = true
-        
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.lightGray.cgColor
-    }
-}
+//extension UICollectionViewCell {
+//    func maskAsCircle() {
+//        self.contentMode = UIViewContentMode.scaleAspectFill
+//        self.layer.cornerRadius = self.frame.height / 2
+//        self.layer.masksToBounds = false
+//        self.clipsToBounds = true
+//        
+//        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.lightGray.cgColor
+//    }
+//}
+
