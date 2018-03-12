@@ -53,23 +53,24 @@ struct Routine : Codable {
 }
 
 struct Subroutine : Codable {
-    var iconURL : URL?
+    var iconPath : String?
     var desc : String?
     var actions : [Action]
     
     // initialize completely empty subroutine at this index
+    // default icon is
     init(at index: Int) {
-        iconURL = nil
+        iconPath = "015-sun"
         desc = nil
         actions = [Action]()
     }
     
-    // only iconURL, desc available for init
-    init(newIconURL: URL?, newDesc: String?) {
-        if let newIconURL = newIconURL {
-            iconURL = newIconURL
+    // only iconURL and desc available for init
+    init(newIconPath: String?, newDesc: String?) {
+        if let newIconPath = newIconPath {
+            iconPath = newIconPath
         } else {
-            iconURL = nil
+            iconPath = nil
         }
         
         if let newDesc = newDesc {
@@ -80,4 +81,5 @@ struct Subroutine : Codable {
         
         actions = [Action]()
     }
+    
 }

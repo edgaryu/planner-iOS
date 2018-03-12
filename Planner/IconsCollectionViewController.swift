@@ -18,9 +18,10 @@ protocol IconsContainerDelegate: class {
 
 class IconsCollectionViewController: UICollectionViewController {
     
-    var icons = [UIColor]()
+//    var icons = [UIColor]()
     var delegate : IconsContainerDelegate?
     var subroutines = [Subroutine]()
+    var selectedIndex: Int?
     
     // Delegate method
     @objc func addIconButtonTapped() {
@@ -47,27 +48,44 @@ class IconsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "currentIconCell", for: indexPath) as! CurrentIconsCollectionViewCell
         let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
         
         // last collectionViewCell is the add button
         if (indexPath.row == subroutines.count) {
-            editButton.setImage(UIImage(named: "icons8-plus-math-40"), for: UIControlState.normal)
+//            editButton.setImage(UIImage(named: "icons8-plus-math-40"), for: UIControlState.normal)
+            cell.setButtonImage(with: "icons8-plus-math-40")
+//            cell.setIconImage(with: "icons8-plus-math-40")
             editButton.isUserInteractionEnabled = true
             editButton.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
         }
             
         // icon collection cell
         else {
-            // if iconURL exists
-            if let iconURL = subroutines[indexPath.row].iconURL {
-                let icon = UIImage(named: iconURL.path)
-                editButton.setImage(icon, for: UIControlState.normal)
+            // if iconPath exists, set button img
+            if let iconPath = subroutines[indexPath.row].iconPath {
+                cell.setButtonImage(with: iconPath)
             }
-            editButton.isUserInteractionEnabled = false
+            
+            // Change border of selected / deselected cells
+            if cell.cellIndex == selectedIndex {
+                cell.iconButton?.layer.borderColor = UIColor.red.cgColor
+                cell.iconButton?.layer.borderWidth = 2
+            } else {
+                //            cell.layer.borderColor = UIColor.cgColor
+                cell.iconButton?.layer.borderWidth = 0
+            }
+            
+//            if let iconPath = subroutines[indexPath.row] {
+//                let icon = UIImage(named: iconPath)
+//                editButton.setImage(icon, for: UIControlState.normal)
+//            }
+//            editButton.isUserInteractionEnabled = false
             
             // if does not exist, leave blank
         }
+        
+        cell.cellIndex = indexPath.row
         
         editButton.maskAsCircle()
         cell.contentView.addSubview(editButton)

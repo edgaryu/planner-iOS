@@ -17,6 +17,7 @@
 		5D8D6EDE203CEDA500D78333 /* RoutineDetailDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */; };
 		5D8D6EE4203FC88A00D78333 /* IconsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */; };
 		5DC1C8BD2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */; };
+		5DC1C8BF20560A480095C726 /* CurrentIconsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */; };
 		5DC867FF200C45DC009FF59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC867FE200C45DC009FF59F /* AppDelegate.swift */; };
 		5DC86804200C45DC009FF59F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86802200C45DC009FF59F /* Main.storyboard */; };
 		5DC86806200C45DC009FF59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86805200C45DC009FF59F /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailDataController.swift; sourceTree = "<group>"; };
 		5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsCollectionViewController.swift; sourceTree = "<group>"; };
 		5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoutineDetailViewController+UICustomization.swift"; sourceTree = "<group>"; };
+		5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentIconsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DC867FB200C45DC009FF59F /* Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC867FE200C45DC009FF59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DC86803200C45DC009FF59F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */,
 				5D3BE266204F1E9B006844B9 /* RoutineAddEditViewController.swift */,
 				5D8B7E6A204F34B300562B49 /* AvailableIconsCollectionViewCell.swift */,
+				5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */,
 				5DC86812200C489D009FF59F /* Routine.swift */,
 				5DC86814200C48D3009FF59F /* Action.swift */,
 				5D81BD1C2034101400937082 /* addIconCollectionViewCell.swift */,
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */,
+				5DC1C8BF20560A480095C726 /* CurrentIconsCollectionViewCell.swift in Sources */,
 				5D8D6EDE203CEDA500D78333 /* RoutineDetailDataController.swift in Sources */,
 				5DC86817200C49C4009FF59F /* AddRoutineTableViewController.swift in Sources */,
 				5D8B7E6B204F34B300562B49 /* AvailableIconsCollectionViewCell.swift in Sources */,

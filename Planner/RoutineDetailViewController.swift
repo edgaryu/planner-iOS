@@ -20,8 +20,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
     
     // Data
     var routineTitle: String?
-    var subroutines = [Subroutine]() {
-    }
+    var subroutines = [Subroutine]()
     var currentSubroutine = 0
     
     // ?
@@ -60,14 +59,14 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
         
     }
     
-    func addNewSubroutine(iconURL: URL?, desc: String?) {
+    func addNewSubroutine(iconPath: String?, desc: String?) {
         print("add")
         
-        var newIconURL : URL?
-        if let iconURL = iconURL {
-            newIconURL = iconURL
+        var newIconPath : String?
+        if let iconURL = iconPath {
+            newIconPath = iconURL
         } else {
-            newIconURL = nil
+            newIconPath = nil
         }
         
         var newDesc : String?
@@ -77,15 +76,19 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
             newDesc = nil
         }
         
-        let newSubroutine = Subroutine(newIconURL: newIconURL, newDesc: newDesc)
+        let newSubroutine = Subroutine(newIconPath: newIconPath, newDesc: newDesc)
         subroutines.append(newSubroutine)
+        
+        iconsCVC?.subroutines = self.subroutines
+        iconsCVC?.collectionView?.reloadData()
+        
     }
     
     func deleteExistingSubroutine() {
         print("delete \(currentSubroutine)")
     }
     
-    func editExistingSubroutine(iconURL: URL?, desc: String?) {
+    func editExistingSubroutine(iconPath: String?, desc: String?) {
         print("edit")
     }
     
@@ -207,7 +210,11 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
         
         updateUI()
         
-        print(subroutines)
+        print("\(subroutines.count) subroutines")
+//        for subroutine in subroutines {
+//            print("\(subroutine.desc ?? "") ")
+//            print("\(subroutine.actions.count) ")
+//        }
     }
 
     // MARK: - Navigation
@@ -286,6 +293,18 @@ func animateButton(_ sender: UIButton) {
 }
 
 extension UIButton {
+    func maskAsCircle() {
+        self.contentMode = UIViewContentMode.scaleAspectFill
+        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.masksToBounds = false
+        self.clipsToBounds = true
+        
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
+}
+
+extension UIImageView {
     func maskAsCircle() {
         self.contentMode = UIViewContentMode.scaleAspectFill
         self.layer.cornerRadius = self.frame.height / 2

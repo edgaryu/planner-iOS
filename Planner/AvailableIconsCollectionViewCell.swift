@@ -13,7 +13,7 @@ class AvailableIconsCollectionViewCell: UICollectionViewCell {
 //    var delegate : ChooseIconDelegate?
     var cellIndex : Int?
     
-    func setButtonImage(with image: UIImage) {
+    func setButtonImage(with iconPath: String) {
 //        availableIcon?.addTarget(self, action: #selector(selectIconButtonTapped), for: UIControlEvents.touchUpInside)
         
 //        availableIcon?.setImage(UIImage(named: imageURL), for: UIControlState.normal)
@@ -25,7 +25,8 @@ class AvailableIconsCollectionViewCell: UICollectionViewCell {
             
             self.addSubview(iconButton!)
         }
-        iconButton?.setImage(image, for: UIControlState.normal)
+        let buttonImg = UIImage(named: iconPath)
+        iconButton?.setImage(buttonImg, for: UIControlState.normal)
     }
     
     

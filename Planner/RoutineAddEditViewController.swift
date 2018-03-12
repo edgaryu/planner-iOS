@@ -9,9 +9,9 @@
 import UIKit
 
 protocol addEditCompletedDelegate : class {
-    func addNewSubroutine(iconURL: URL?, desc: String?)
+    func addNewSubroutine(iconPath: String?, desc: String?)
     func deleteExistingSubroutine()
-    func editExistingSubroutine(iconURL: URL?, desc: String?)
+    func editExistingSubroutine(iconPath: String?, desc: String?)
 }
 
 class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -22,7 +22,7 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
     var delegate : addEditCompletedDelegate?
     var newSubroutineState : Bool? = true
     
-    var iconsArray = [URL]()
+    var iconsArray = [String]()
     
     var selectedIndex: Int?
     var desc : String?
@@ -35,7 +35,7 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
     }
     
     @IBAction func saveBarButtonTapped(_ sender: UIBarButtonItem) {
-        let saveIconURL : URL?
+        let saveIconURL : String?
         let saveDesc : String?
 
         if let selectedIndex = selectedIndex {
@@ -53,11 +53,11 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         // adding new subroutine
         if (newSubroutineState!) {
             print("save tapped")
-            delegate?.addNewSubroutine(iconURL: saveIconURL, desc: saveDesc)
+            delegate?.addNewSubroutine(iconPath: saveIconURL, desc: saveDesc)
         }
         // editing existing subroutine
         else {
-            delegate?.editExistingSubroutine(iconURL: saveIconURL, desc: saveDesc)
+            delegate?.editExistingSubroutine(iconPath: saveIconURL, desc: saveDesc)
         }
         popToRoutineDetailVC()
     }
@@ -96,8 +96,11 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconsArray = Bundle.main.urls(forResourcesWithExtension: "png", subdirectory: "Icons")! as [URL]
-        
+        let tempURLArray = Bundle.main.urls(forResourcesWithExtension: "png", subdirectory: "Icons")! as [URL]
+        iconsArray = tempURLArray.map { url -> String in
+            let theFileName = (url.path as NSString).lastPathComponent
+            return theFileName
+        }
     }
     
     // ---------------------
@@ -114,8 +117,8 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         // Remember to NOT write 'delegate?'
 //        cell.delegate = self
         cell.cellIndex = indexPath.row
-        let cellIconImage = UIImage(named: iconsArray[indexPath.row].path)
-        cell.setButtonImage(with: cellIconImage!)
+//        let cellIconImage = UIImage(named: iconsArray[indexPath.row])
+        cell.setButtonImage(with: iconsArray[indexPath.row])
 
 //        let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
 //        editButton.setImage(UIImage(named: iconsArray[indexPath.row].path!), for: UIControlState.normal)
