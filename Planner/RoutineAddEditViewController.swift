@@ -11,7 +11,7 @@ import UIKit
 protocol addEditCompletedDelegate : class {
     func addNewSubroutine(iconPath: String?, desc: String?)
     func deleteExistingSubroutine()
-    func editExistingSubroutine(iconPath: String?, desc: String?)
+    func editExistingSubroutine(iconPath: String?, desc: String?, subroutineIndex: IndexPath)
 }
 
 class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -21,6 +21,10 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
     
     var delegate : addEditCompletedDelegate?
     var newSubroutineState : Bool? = true
+    
+    // only if in editing subroutine state
+    var toEditIconPath: String?
+    var toEditSubroutineIndex: IndexPath?
     
     var iconsArray = [String]()
     
@@ -57,7 +61,11 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         }
         // editing existing subroutine
         else {
-            delegate?.editExistingSubroutine(iconPath: saveIconURL, desc: saveDesc)
+            guard let toEditSubroutineIndex = toEditSubroutineIndex else {
+                print("Cannot find subroutine index for editing")
+                return
+            }
+            delegate?.editExistingSubroutine(iconPath: saveIconURL, desc: saveDesc, subroutineIndex: toEditSubroutineIndex)
         }
         popToRoutineDetailVC()
     }
@@ -100,6 +108,20 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         iconsArray = tempURLArray.map { url -> String in
             let theFileName = (url.path as NSString).lastPathComponent
             return theFileName
+        }
+        
+        // If editing pre-existing subroutine
+        if let newSubroutineState = newSubroutineState {
+            
+            if (!newSubroutineState) {
+                descTextField.text = desc
+                
+                if let toEditIconPath = toEditIconPath {
+                    selectedIndex = iconsArray.index(of: toEditIconPath)
+                    availableIconsCollectionView.reloadData()
+                }
+                
+            }
         }
     }
     

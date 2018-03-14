@@ -22,6 +22,7 @@ extension RoutineDetailViewController {
         iconsContainerView.layer.cornerRadius = 5
         
         
+        
         self.view.addSubview(bottomBackgroundView)
         bottomBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
         bottomBackgroundView.snp.makeConstraints { (make) in
@@ -45,7 +46,17 @@ extension RoutineDetailViewController {
         iconsContainerView.layer.borderWidth = 2
         iconsContainerView.layer.borderColor = UIColor.red.cgColor
         iconsContainerView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(iconsContainerView.superview!)
+            make.top.left.equalTo(iconsContainerView.superview!)
+            make.right.equalTo(iconsContainerView.superview!).offset(-25)
+        }
+        
+//        let addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+        addIconButton.setImage(UIImage(named: "017-edit"), for: .normal)
+//        addIconButton.maskAsCircle()
+        userView.addSubview(addIconButton)
+        addIconButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(iconsContainerView)
+            make.right.equalTo(userView).offset(0)
         }
         
         userView.addSubview(descTextLabel)

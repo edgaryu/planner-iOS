@@ -159,11 +159,11 @@
                                                 <state key="normal" image="icon-edit"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-Vi-Vvn">
-                                                <rect key="frame" x="153" y="331" width="46" height="30"/>
+                                                <rect key="frame" x="27" y="329" width="46" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
-                                                    <segue destination="6Z3-4l-5e1" kind="show" id="HF0-6o-4Gp"/>
+                                                    <action selector="button2Tapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="NsC-T6-QU4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -189,18 +189,20 @@
                         <outlet property="actionsView" destination="sMH-VM-zJ5" id="mfi-u9-bhx"/>
                         <outlet property="addActionStackView" destination="9x0-5f-J1F" id="Lae-jl-14y"/>
                         <outlet property="bottomBackgroundView" destination="iAv-Dr-uo3" id="hY0-WO-Dno"/>
+                        <outlet property="button2" destination="B4e-Vi-Vvn" id="rzf-CM-YTy"/>
                         <outlet property="descTextLabel" destination="NPu-BN-YhQ" id="kbM-eA-Rhg"/>
                         <outlet property="editActionsButton" destination="bPU-2h-WYX" id="eUH-no-e2H"/>
                         <outlet property="iconsContainerView" destination="KRP-29-zzS" id="Cjj-PZ-DzJ"/>
                         <outlet property="userView" destination="q7o-Lt-kxF" id="WR0-FX-6Zl"/>
                         <segue destination="avy-hr-50d" kind="unwind" identifier="deleteRoutine" unwindAction="unwindToListWithSegue:" id="wZj-Bf-tP2"/>
                         <segue destination="6Z3-4l-5e1" kind="show" identifier="triggerAddSubroutine" id="sqM-Xh-zW0"/>
+                        <segue destination="6Z3-4l-5e1" kind="show" identifier="triggerEditSubroutine" id="H5h-kI-i8S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXb-FA-s0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="avy-hr-50d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="375" y="875"/>
+            <point key="canvasLocation" x="375" y="874"/>
         </scene>
         <!--Icons Collection View Controller-->
         <scene sceneID="UTK-eY-Uvr">
@@ -235,6 +237,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8l-YU-EpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1166" y="601"/>
+        </scene>
+        <!--Icon Popover View Controller-->
+        <scene sceneID="z1f-Tt-sNV">
+            <objects>
+                <viewController storyboardIdentifier="iconPopover" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" id="x8G-5e-0tK" customClass="IconPopoverViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L2d-g7-gb5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hcj-Dr-Bjf">
+                                <rect key="frame" x="145" y="269" width="30" height="30"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-dC-qcX">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f30-GQ-i7A">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editButtonTapped:" destination="x8G-5e-0tK" eventType="touchUpInside" id="OP5-0j-jwf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1cf-dC-qcX" secondAttribute="trailing" id="Tgd-Ih-EH3"/>
+                                    <constraint firstItem="1cf-dC-qcX" firstAttribute="leading" secondItem="Hcj-Dr-Bjf" secondAttribute="leading" id="Vjx-9e-OYa"/>
+                                    <constraint firstItem="1cf-dC-qcX" firstAttribute="top" secondItem="Hcj-Dr-Bjf" secondAttribute="top" id="apl-fb-NKt"/>
+                                    <constraint firstAttribute="bottom" secondItem="1cf-dC-qcX" secondAttribute="bottom" id="kuf-fN-QXU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hcj-Dr-Bjf" firstAttribute="centerX" secondItem="L2d-g7-gb5" secondAttribute="centerX" id="TBs-31-Vho"/>
+                            <constraint firstItem="Hcj-Dr-Bjf" firstAttribute="centerY" secondItem="L2d-g7-gb5" secondAttribute="centerY" id="vw3-kR-EZ3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QCG-Tg-sNT"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="100" height="100"/>
+                    <connections>
+                        <outlet property="editButton" destination="f30-GQ-i7A" id="mua-Lg-VtB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xFs-Uc-Y8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1813" y="875"/>
         </scene>
         <!--Routine Action Table View Controller-->
         <scene sceneID="05j-HM-ytU">
@@ -407,6 +458,6 @@
         <image name="icons8-plus-math-40" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HF0-6o-4Gp"/>
+        <segue reference="H5h-kI-i8S"/>
     </inferredMetricsTieBreakers>
 </document>

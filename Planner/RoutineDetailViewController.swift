@@ -13,7 +13,10 @@ import SnapKit
 //    static let iconSize = 50
 //}
 
-class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate {
+class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate, UIPopoverPresentationControllerDelegate {
+    
+    
+    
     
     var actionTVC: RoutineActionTableViewController?
     var iconsCVC: IconsCollectionViewController?
@@ -22,6 +25,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
     var routineTitle: String?
     var subroutines = [Subroutine]()
     var currentSubroutine = 0
+    var toEditSubroutineIndex : IndexPath?
     
     // ?
     var editMode = false
@@ -35,6 +39,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
     
     // upper userView child
     @IBOutlet weak var iconsContainerView: UIView!
+    var addIconButton : UIButton!
     @IBOutlet weak var descTextLabel: UILabel!
     
     // lower userView child
@@ -53,12 +58,31 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
         subroutines[currentSubroutine].actions = newActions
     }
     
-    // Called from iconsContainerView. call routineaddeditvc
-    func addNewSubroutine() {
+    // IconsContainerDelegate functions
+    @objc func triggerNewSubroutine() {
         performSegue(withIdentifier: "triggerAddSubroutine", sender: Any?.self)
-        
+    }
+    func triggerEditSubroutine(at indexPath: IndexPath) {
+        toEditSubroutineIndex = indexPath
+        performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
+        toEditSubroutineIndex = nil
+    }
+    func updateCurrentSubroutine(with newSubIndex: Int) {
+        currentSubroutine = newSubIndex
     }
     
+    func reloadRoutineDetailVC() {
+//        currentSubroutine = newSubIndex
+        
+        let newSubroutine = subroutines[currentSubroutine]
+        iconsCVC?.collectionView?.reloadData()
+        descTextLabel.text = newSubroutine.desc ?? ""
+        actionTVC?.actions = newSubroutine.actions
+        actionTVC?.tableView.reloadData()
+    }
+    
+    
+    // addEditCompletedDelgate functions
     func addNewSubroutine(iconPath: String?, desc: String?) {
         print("add")
         
@@ -80,16 +104,29 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
         subroutines.append(newSubroutine)
         
         iconsCVC?.subroutines = self.subroutines
-        iconsCVC?.collectionView?.reloadData()
+//        iconsCVC?.collectionView?.reloadData()
+        reloadRoutineDetailVC()
         
     }
-    
     func deleteExistingSubroutine() {
         print("delete \(currentSubroutine)")
     }
-    
-    func editExistingSubroutine(iconPath: String?, desc: String?) {
-        print("edit")
+    func editExistingSubroutine(iconPath: String?, desc: String?, subroutineIndex: IndexPath) {
+        if iconPath == iconPath {
+            subroutines[subroutineIndex.row].iconPath = iconPath
+        } else {
+            subroutines[subroutineIndex.row].iconPath = nil
+        }
+        
+        if desc == desc {
+            subroutines[subroutineIndex.row].desc = desc
+        } else {
+            subroutines[subroutineIndex.row].desc = nil
+        }
+        
+        iconsCVC?.subroutines = self.subroutines
+//        iconsCVC?.collectionView?.reloadData()
+        reloadRoutineDetailVC()
     }
     
     // ---------------------
@@ -181,6 +218,33 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
 //        // if 1+ subroutine, delete, switch to next in index.
 //    }
     
+    
+    
+    @IBOutlet weak var button2: UIButton!
+    @IBAction func button2Tapped(_ sender: UIButton) {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
+        popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
+        
+        
+        if let popover: UIPopoverPresentationController =
+            popoverController.popoverPresentationController {
+            let sourceView = sender as UIView
+            popover.delegate = self
+            popoverController.preferredContentSize = CGSize(width: 100, height: 30)
+//            popover.backgroundColor = popoverController.view.backgroundColor
+            popover.sourceView = sourceView
+            popover.sourceRect = sourceView.bounds
+        }
+        
+        present(popoverController, animated: true, completion: nil)
+
+    }
+    // UIPopoverPresentationControllerDelegate method
+//    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return .none
+//    }
+    
     // ---------------------
     // viewDidLoad()
     // ---------------------
@@ -195,19 +259,21 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
 //            self.title = routineTitle
 //        }
         self.title = routineTitle
+        
+        // add icon button
+        addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+        addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
 
         // set delegates
         actionTextField.delegate = self
 //        descTextView.delegate = self
         
         // Initialize view with data
-//        currentIcon.setImage(UIImage(named: subroutines[currentSubroutine].icon.rawValue), for: UIControlState.normal)
-//        if let subroutineDesc = subroutines[currentSubroutine].desc {
-//            descTextView.text = subroutineDesc
-//        }
+        descTextLabel.text = subroutines[currentSubroutine].desc ?? ""
         
 //        self.hideKeyboard()
         
+        // Layout the view with SnapKit
         updateUI()
         
         print("\(subroutines.count) subroutines")
@@ -249,7 +315,6 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
 //            iconsCVC?.icons = tempRoutineArray
             iconsCVC?.subroutines = self.subroutines
             iconsCVC?.delegate = self
-
         }
         if let addEditVC = segue.destination as? RoutineAddEditViewController {
             addEditVC.delegate = self
@@ -262,14 +327,29 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, UIText
             }
         }
         
-//        if segue.identifier == "AddSubroutine" {
+        if segue.identifier == "triggerEditSubroutine" {
+            if let routineAddEditVC = segue.destination as? RoutineAddEditViewController {
+                routineAddEditVC.newSubroutineState = false
+                if let toEditSubroutineIndex = toEditSubroutineIndex {
+                    let subroutine = subroutines[toEditSubroutineIndex.row]
+                    routineAddEditVC.desc = subroutine.desc
+                    routineAddEditVC.toEditIconPath = subroutine.iconPath
+                    routineAddEditVC.toEditSubroutineIndex = toEditSubroutineIndex
+                }
+            }
+        }
         
+//        if segue.identifier == "popoverSegue" {
+//
+//            let popoverViewController = segue.destination
+//            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
+//            popoverViewController.popoverPresentationController!.delegate = self
+//
 //        }
-//        else if segue.identifier == "EditSubroutine" {
-    
-//        }
+        
         
     }
+
 
 }
 

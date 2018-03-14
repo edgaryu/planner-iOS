@@ -13,19 +13,61 @@ import UIKit
 let iconSize = 50
 
 protocol IconsContainerDelegate: class {
-    func addNewSubroutine()
+    func triggerNewSubroutine()
+    func triggerEditSubroutine(at indexPath: IndexPath)
+    func reloadRoutineDetailVC()
+    func updateCurrentSubroutine(with newSubIndex: Int)
 }
 
-class IconsCollectionViewController: UICollectionViewController {
+class IconsCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, IconPopoverDelegate {
+    
+    
     
 //    var icons = [UIColor]()
     var delegate : IconsContainerDelegate?
     var subroutines = [Subroutine]()
-    var selectedIndex: Int?
+    var selectedIndex = 0
     
-    // Delegate method
-    @objc func addIconButtonTapped() {
-        delegate?.addNewSubroutine()    
+    // Delegate functions
+    func editSubroutine(at indexPath: IndexPath) {
+        dismiss(animated: true, completion: nil)
+        delegate?.triggerEditSubroutine(at: indexPath)
+        
+    }
+
+    
+    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+        if (gestureRecognizer.state != UIGestureRecognizerState.began){
+            return
+        }
+        let p = gestureRecognizer.location(in: self.collectionView)
+        if let indexPath : IndexPath = (self.collectionView?.indexPathForItem(at: p)){
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
+                as! IconPopoverViewController
+            popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
+            popoverController.delegate = self
+            popoverController.cellIndexPath = indexPath
+            
+            
+            if let popover: UIPopoverPresentationController =
+                popoverController.popoverPresentationController {
+                let sourceView = self.collectionView?.cellForItem(at: indexPath)
+                popover.delegate = self
+                popover.permittedArrowDirections = .up
+                popoverController.preferredContentSize = CGSize(width: 50, height: 30)
+                //            popover.backgroundColor = popoverController.view.backgroundColor
+                popover.sourceView = sourceView
+                popover.sourceRect = sourceView!.bounds
+            }
+            present(popoverController, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     override func viewDidLoad() {
@@ -33,6 +75,12 @@ class IconsCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        self.collectionView?.addGestureRecognizer(lpgr)
     }
     
     // MARK: UICollectionViewDataSource
@@ -43,37 +91,34 @@ class IconsCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subroutines.count + 1
+        return subroutines.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "currentIconCell", for: indexPath) as! CurrentIconsCollectionViewCell
-        let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+//        let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+        cell.cellIndex = indexPath.row
+        
         
         // last collectionViewCell is the add button
-        if (indexPath.row == subroutines.count) {
-//            editButton.setImage(UIImage(named: "icons8-plus-math-40"), for: UIControlState.normal)
-            cell.setButtonImage(with: "icons8-plus-math-40")
-//            cell.setIconImage(with: "icons8-plus-math-40")
-            editButton.isUserInteractionEnabled = true
-            editButton.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
-        }
-            
+//        if (indexPath.row == subroutines.count) {
+//            cell.setButtonImage(with: "icons8-plus-math-40")
+//
+////            let cell1 = self.collectionView?.cellForItem(at: indexPath) as! CurrentIconsCollectionViewCell
+////            print("\(indexPath.row), \(cell1.cellIndex)")
+//
+////            cell.iconButton?.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
+//            print("cfrw")
+////            cell.iconButton?.isUserInteractionEnabled = true
+//
+//        }
+        
         // icon collection cell
-        else {
+//        else {
             // if iconPath exists, set button img
             if let iconPath = subroutines[indexPath.row].iconPath {
                 cell.setButtonImage(with: iconPath)
-            }
-            
-            // Change border of selected / deselected cells
-            if cell.cellIndex == selectedIndex {
-                cell.iconButton?.layer.borderColor = UIColor.red.cgColor
-                cell.iconButton?.layer.borderWidth = 2
-            } else {
-                //            cell.layer.borderColor = UIColor.cgColor
-                cell.iconButton?.layer.borderWidth = 0
             }
             
 //            if let iconPath = subroutines[indexPath.row] {
@@ -83,15 +128,42 @@ class IconsCollectionViewController: UICollectionViewController {
 //            editButton.isUserInteractionEnabled = false
             
             // if does not exist, leave blank
+//        }
+        
+        // Change border of selected / deselected cells
+        if cell.cellIndex == selectedIndex {
+            cell.iconButton?.layer.borderColor = UIColor.red.cgColor
+            cell.iconButton?.layer.borderWidth = 2
+        } else {
+            //            cell.layer.borderColor = UIColor.cgColor
+            cell.iconButton?.layer.borderWidth = 0
         }
         
-        cell.cellIndex = indexPath.row
-        
-        editButton.maskAsCircle()
-        cell.contentView.addSubview(editButton)
-//        cell.maskAsCircle()
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cell1 = self.collectionView?.cellForItem(at: indexPath) as! CurrentIconsCollectionViewCell
+//        print("\(indexPath.row), \(cell1.cellIndex)")
+//        self.collectionView?.cellForItem(at: indexPath.row)
+        if (selectedIndex == indexPath.row) {
+            print("Same")
+            return
+        }
+        
+        // return if selected last cell or if selected same index
+        if (indexPath.row == subroutines.count) {
+            print("End")
+            return
+        }
+        
+        
+        // else, change selectedIndex, reload iconsCollection, then call delegate to reload actionsTVC and desc
+        selectedIndex = indexPath.row
+        delegate?.updateCurrentSubroutine(with: selectedIndex)
+        delegate?.reloadRoutineDetailVC()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -130,16 +202,3 @@ class IconsCollectionViewController: UICollectionViewController {
     */
 
 }
-
-//extension UICollectionViewCell {
-//    func maskAsCircle() {
-//        self.contentMode = UIViewContentMode.scaleAspectFill
-//        self.layer.cornerRadius = self.frame.height / 2
-//        self.layer.masksToBounds = false
-//        self.clipsToBounds = true
-//        
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.lightGray.cgColor
-//    }
-//}
-

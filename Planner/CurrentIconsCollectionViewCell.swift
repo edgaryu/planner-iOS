@@ -10,14 +10,12 @@ import UIKit
 
 class CurrentIconsCollectionViewCell: UICollectionViewCell {
     var iconButton : UIButton?
-    //    var delegate : ChooseIconDelegate?
+//    var delegate : currentIconsDelegate?
     var cellIndex : Int?
-    var iconImage : UIImageView?
+//    var iconImage : UIImageView?
     
     func setButtonImage(with iconPath: String) {
         //        availableIcon?.addTarget(self, action: #selector(selectIconButtonTapped), for: UIControlEvents.touchUpInside)
-        
-        //        availableIcon?.setImage(UIImage(named: imageURL), for: UIControlState.normal)
         
         if iconButton == nil {
             iconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
@@ -29,6 +27,11 @@ class CurrentIconsCollectionViewCell: UICollectionViewCell {
         let buttonImg = UIImage(named: iconPath)
         iconButton?.setImage(buttonImg, for: UIControlState.normal)
     }
+    
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        iconButton?.removeTarget(nil, action: nil, for: .allEvents)
+//    }
     
 //    func setIconImage(with iconPath: String) {
 //        if iconImage == nil {
