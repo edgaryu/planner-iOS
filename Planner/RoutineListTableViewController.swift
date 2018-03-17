@@ -44,6 +44,11 @@ class RoutineListTableViewController: UITableViewController {
         Routine.saveToFile(routines: self.routines)
     }
     
+    @objc private func toggleEditing() {
+        self.tableView.setEditing(!self.tableView.isEditing, animated: true)
+        navigationItem.leftBarButtonItem?.title = self.tableView.isEditing ? "Done" : "Edit" 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,10 +59,9 @@ class RoutineListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         routines = Routine.loadFromFile()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing)) // create a bat button
+        navigationItem.leftBarButtonItem = editButton // assign button
     }
 
     // MARK: - Table view data source
@@ -89,17 +93,22 @@ class RoutineListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
         if editingStyle == .delete {
             // Delete the row from the data source
+            routines.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        
+        self.saveRoutinesToStorage()
     }
-    */
+ 
 
     /*
     // Override to support rearranging the table view.
@@ -122,14 +131,14 @@ class RoutineListTableViewController: UITableViewController {
     
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
         if segue.identifier == "saveAddRoutine" {
-            let routineDetailController = segue.source as! RoutineDetailViewController
+            let routineDetailVC = segue.source as! RoutineDetailViewController
 
             // add/editing routine
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // change title, actions
                 var thisRoutine = routines[selectedIndexPath.row]
 //                thisRoutine.routineTitle = routineTitle
-                thisRoutine.subroutines = routineDetailController.subroutines
+                thisRoutine.subroutines = routineDetailVC.subroutines
                 routines[selectedIndexPath.row] = thisRoutine
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
 
@@ -142,17 +151,17 @@ class RoutineListTableViewController: UITableViewController {
 //                    routines.append(newRoutine)
 //                    tableView.insertRows(at: [newIndexPath], with: .automatic)
 //                }
-            
+
             saveRoutinesToStorage()
-            
+
         }
-        else if segue.identifier == "deleteRoutine" {
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                routines.remove(at: selectedIndexPath.row)
-                tableView.reloadData()
-            }
-            saveRoutinesToStorage()
-        }
+//        else if segue.identifier == "deleteRoutine" {
+//            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+//                routines.remove(at: selectedIndexPath.row)
+//                tableView.reloadData()
+//            }
+//            saveRoutinesToStorage()
+//        }
         
         
     }

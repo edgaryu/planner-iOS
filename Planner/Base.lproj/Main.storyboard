@@ -55,7 +55,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="List" id="XWE-uW-lXH">
-                        <barButtonItem key="leftBarButtonItem" title="Option" id="t5T-Sd-iie"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="t5T-Sd-iie"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oHg-hf-LSf">
                             <connections>
                                 <action selector="addRoutineButtonTapped:" destination="fVj-BM-goe" id="Fio-gl-O3F"/>
@@ -154,12 +154,15 @@
                                                 </connections>
                                             </containerView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-2h-WYX">
-                                                <rect key="frame" x="270" y="329" width="32" height="32"/>
+                                                <rect key="frame" x="271" y="337" width="32" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icon-edit"/>
+                                                <state key="normal" image="setting-off"/>
+                                                <connections>
+                                                    <action selector="editActionsButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="QrL-ph-xnB"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-Vi-Vvn">
-                                                <rect key="frame" x="27" y="329" width="46" height="30"/>
+                                                <rect key="frame" x="23" y="338" width="46" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -454,8 +457,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon-edit" width="32" height="32"/>
         <image name="icons8-plus-math-40" width="40" height="40"/>
+        <image name="setting-off" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="H5h-kI-i8S"/>

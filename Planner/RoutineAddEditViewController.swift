@@ -10,8 +10,8 @@ import UIKit
 
 protocol addEditCompletedDelegate : class {
     func addNewSubroutine(iconPath: String?, desc: String?)
-    func deleteExistingSubroutine()
-    func editExistingSubroutine(iconPath: String?, desc: String?, subroutineIndex: IndexPath)
+    func deleteSubroutine(at toEditSubroutineIndex: IndexPath)
+    func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: IndexPath)
 }
 
 class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -65,7 +65,7 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
                 print("Cannot find subroutine index for editing")
                 return
             }
-            delegate?.editExistingSubroutine(iconPath: saveIconURL, desc: saveDesc, subroutineIndex: toEditSubroutineIndex)
+            delegate?.editExistingSubroutine(iconPath: saveIconURL, desc: saveDesc, at: toEditSubroutineIndex)
         }
         popToRoutineDetailVC()
     }
@@ -87,8 +87,12 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         let deleteSubroutineAlert = UIAlertController(title: "Delete this subroutine?", message: "", preferredStyle: UIAlertControllerStyle.alert)
         deleteSubroutineAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         deleteSubroutineAlert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: { action in
+            guard let toEditSubroutineIndex = self.toEditSubroutineIndex else {
+                print("Cannot find subroutine index for editing")
+                return
+            }
             
-            self.delegate?.deleteExistingSubroutine()
+            self.delegate?.deleteSubroutine(at: toEditSubroutineIndex)
             self.popToRoutineDetailVC()
             
         }))
@@ -105,12 +109,13 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         super.viewDidLoad()
         
         let tempURLArray = Bundle.main.urls(forResourcesWithExtension: "png", subdirectory: "Icons")! as [URL]
+        // init sample icons from Icons Directory
         iconsArray = tempURLArray.map { url -> String in
             let theFileName = (url.path as NSString).lastPathComponent
             return theFileName
         }
         
-        // If editing pre-existing subroutine
+        // If editing a subroutine
         if let newSubroutineState = newSubroutineState {
             
             if (!newSubroutineState) {

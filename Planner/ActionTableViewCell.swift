@@ -22,7 +22,6 @@ class ActionTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     
     @IBAction func actionLabelTextFieldEditing(_ sender: UITextField) {
-        print(actionLabelTextField.text!)
         delegate?.actionNameEdited(sender: self, newTitle: actionLabelTextField.text!)
     }
     

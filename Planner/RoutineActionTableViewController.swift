@@ -107,7 +107,7 @@ class RoutineActionTableViewController: UITableViewController, ActionCellDelegat
             syncWithRoutineDetailVC()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+
         }    
     }
  
@@ -134,16 +134,6 @@ class RoutineActionTableViewController: UITableViewController, ActionCellDelegat
         return CGFloat(40)
     }
  
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 
 }
