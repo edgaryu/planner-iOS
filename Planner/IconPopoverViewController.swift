@@ -10,18 +10,26 @@ import UIKit
 
 protocol IconPopoverDelegate : class {
     func editSubroutine(at indexPath: IndexPath)
+    func deleteSubroutine(at indexPath: IndexPath)
 }
 
 class IconPopoverViewController: UIViewController {
-    @IBOutlet weak var editButton: UIButton!
+    
     var delegate: IconPopoverDelegate?
     var cellIndexPath : IndexPath?
+    
+    @IBOutlet weak var editButton: UIButton!
     
     @IBAction func editButtonTapped(_ sender: UIButton) {
         if let cellIndexPath = cellIndexPath {
             delegate?.editSubroutine(at: cellIndexPath)
         }
         
+    }
+    @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        if let cellIndexPath = cellIndexPath {
+            delegate?.deleteSubroutine(at: cellIndexPath)
+        }
     }
     
     override func viewDidLoad() {

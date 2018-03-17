@@ -11,10 +11,14 @@ import UIKit
 //private let reuseIdentifier = "Cell"
 
 let iconSize = 50
+let popoverWidth = 50
+let popoverHeight = 50
 
 protocol IconsContainerDelegate: class {
     func triggerNewSubroutine()
     func triggerEditSubroutine(at indexPath: IndexPath)
+    func triggerDeleteSubroutine(at indexPath: IndexPath)
+    
     func reloadRoutineDetailVC()
     func updateCurrentSubroutine(with newSubIndex: Int)
 }
@@ -32,7 +36,10 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
     func editSubroutine(at indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
         delegate?.triggerEditSubroutine(at: indexPath)
-        
+    }
+    func deleteSubroutine(at indexPath: IndexPath) {
+        dismiss(animated: true, completion: nil)
+        delegate?.triggerDeleteSubroutine(at: indexPath)
     }
 
     
@@ -55,7 +62,7 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
                 let sourceView = self.collectionView?.cellForItem(at: indexPath)
                 popover.delegate = self
                 popover.permittedArrowDirections = .up
-                popoverController.preferredContentSize = CGSize(width: 50, height: 30)
+                popoverController.preferredContentSize = CGSize(width: popoverWidth, height: popoverHeight)
                 //            popover.backgroundColor = popoverController.view.backgroundColor
                 popover.sourceView = sourceView
                 popover.sourceRect = sourceView!.bounds

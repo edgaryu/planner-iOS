@@ -65,6 +65,9 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
         toEditSubroutineIndex = nil
     }
+    func triggerDeleteSubroutine(at indexPath: IndexPath) {
+        deleteSubroutine(at: indexPath)
+    }
     func updateCurrentSubroutine(with newSubIndex: Int) {
         currentSubroutine = newSubIndex
     }

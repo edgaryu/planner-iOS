@@ -56,7 +56,6 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
 
         // adding new subroutine
         if (newSubroutineState!) {
-            print("save tapped")
             delegate?.addNewSubroutine(iconPath: saveIconURL, desc: saveDesc)
         }
         // editing existing subroutine
