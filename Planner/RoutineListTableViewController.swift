@@ -85,13 +85,53 @@ class RoutineListTableViewController: UITableViewController {
     }
  
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+            
+            let alertController = UIAlertController(title: "Edit routine title", message: "", preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = ""
+            })
+            alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler:  { alert in
+                let textField = alertController.textFields![0] as UITextField
+                
+                
+                if let newRoutineTitle = textField.text {
+                    self.routines[indexPath.row].routineTitle = newRoutineTitle
+                    self.saveRoutinesToStorage()
+                
+                    DispatchQueue.main.async {
+                        self.tableView?.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }))
+
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+//        edit.backgroundColor = UIColor(red: 0, green: 122, blue: 255, alpha: 1)
+        
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            self.routines.remove(at: indexPath.row)
+            self.saveRoutinesToStorage()
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
+            
+        }
+        delete.backgroundColor = .red
+        
+        return [delete, edit]
+    }
+ 
 
     
     // Override to support editing the table view.
