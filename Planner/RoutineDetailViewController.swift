@@ -45,6 +45,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     @IBOutlet weak var actionsView: UIView!
     @IBOutlet weak var addActionStackView: UIStackView!
     @IBOutlet weak var actionsContainerView: UIView!
+    @IBOutlet weak var weatherButton: UIButton!
     @IBOutlet weak var editActionsButton: UIButton!
     
     // ---------------------
@@ -217,8 +218,9 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // ---------------------
     
     
-    @IBOutlet weak var button2: UIButton!
-    @IBAction func button2Tapped(_ sender: UIButton) {
+    
+    // Weather button
+    @IBAction func weatherButtonTapped(_ sender: UIButton) {
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
         popoverController.modalPresentationStyle = UIModalPresentationStyle.popover

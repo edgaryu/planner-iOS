@@ -27,6 +27,7 @@ class RoutineListTableViewController: UITableViewController {
             }
             let newRoutine = Routine(routineTitle: newRoutineTitle, subroutines: [Subroutine]())
             self.routines.append(newRoutine)
+            
             DispatchQueue.main.async {
                 self.tableView.beginUpdates()
                 self.tableView.insertRows(at: [IndexPath(row: self.routines.count-1, section: 0)], with: .automatic)
@@ -44,10 +45,10 @@ class RoutineListTableViewController: UITableViewController {
         Routine.saveToFile(routines: self.routines)
     }
     
-    @objc private func toggleEditing() {
-        self.tableView.setEditing(!self.tableView.isEditing, animated: true)
-        navigationItem.leftBarButtonItem?.title = self.tableView.isEditing ? "Done" : "Edit" 
-    }
+//    @objc private func toggleEditing() {
+//        self.tableView.setEditing(!self.tableView.isEditing, animated: true)
+//        navigationItem.leftBarButtonItem?.title = self.tableView.isEditing ? "Done" : "Edit"
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +61,8 @@ class RoutineListTableViewController: UITableViewController {
         
         routines = Routine.loadFromFile()
         
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing)) // create a bat button
-        navigationItem.leftBarButtonItem = editButton // assign button
+//        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing)) // create a bat button
+//        navigationItem.leftBarButtonItem = editButton // assign button
     }
 
     // MARK: - Table view data source
