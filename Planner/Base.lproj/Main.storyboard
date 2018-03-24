@@ -198,8 +198,8 @@
                         <outlet property="userView" destination="q7o-Lt-kxF" id="WR0-FX-6Zl"/>
                         <outlet property="weatherButton" destination="B4e-Vi-Vvn" id="rzf-CM-YTy"/>
                         <segue destination="avy-hr-50d" kind="unwind" identifier="deleteRoutine" unwindAction="unwindToListWithSegue:" id="wZj-Bf-tP2"/>
-                        <segue destination="6Z3-4l-5e1" kind="show" identifier="triggerAddSubroutine" id="sqM-Xh-zW0"/>
-                        <segue destination="6Z3-4l-5e1" kind="show" identifier="triggerEditSubroutine" id="H5h-kI-i8S"/>
+                        <segue destination="qsp-1w-wal" kind="show" identifier="triggerAddSubroutine" id="lKc-KY-K1r"/>
+                        <segue destination="qsp-1w-wal" kind="show" identifier="triggerEditSubroutine" id="Hra-WU-9Q8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXb-FA-s0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,11 +398,11 @@
             </objects>
             <point key="canvasLocation" x="1164" y="1028"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Routine Add Edit Table View Controller-->
         <scene sceneID="bt5-8y-gXM">
             <objects>
-                <tableViewController id="qsp-1w-wal" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wqF-d0-IcF">
+                <tableViewController id="qsp-1w-wal" customClass="RoutineAddEditTableViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wqF-d0-IcF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -421,15 +421,15 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SNh-sx-ri6">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XNl-KG-heM">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XNl-KG-heM">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lkb-pG-peM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="availableIconCell" id="lkb-pG-peM" customClass="AvailableIconsCollectionViewCell" customModule="Planner" customModuleProvider="target">
+                                                            <rect key="frame" x="20" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -437,6 +437,10 @@
                                                             </view>
                                                         </collectionViewCell>
                                                     </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="qsp-1w-wal" id="i4d-cE-bVr"/>
+                                                        <outlet property="delegate" destination="qsp-1w-wal" id="Iui-QP-z3a"/>
+                                                    </connections>
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
@@ -452,11 +456,28 @@
                             <tableViewSection headerTitle="Description" id="hyw-zR-a7g">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ueI-m2-Xub">
-                                        <rect key="frame" x="0.0" y="211.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ueI-m2-Xub" id="KAj-nk-1fU">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a51-TJ-5MD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="descTextFieldEditing:" destination="qsp-1w-wal" eventType="editingChanged" id="WES-cD-a5Q"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="a51-TJ-5MD" secondAttribute="trailing" id="0xS-dm-K8j"/>
+                                                <constraint firstAttribute="bottom" secondItem="a51-TJ-5MD" secondAttribute="bottom" id="1dv-fs-der"/>
+                                                <constraint firstItem="a51-TJ-5MD" firstAttribute="top" secondItem="KAj-nk-1fU" secondAttribute="top" id="LY3-PU-LHn"/>
+                                                <constraint firstItem="a51-TJ-5MD" firstAttribute="leading" secondItem="KAj-nk-1fU" secondAttribute="leading" id="l93-Wr-JKX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -464,11 +485,28 @@
                             <tableViewSection id="UGg-nk-bxd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8hI-Hm-pFe">
-                                        <rect key="frame" x="0.0" y="291.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="290" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8hI-Hm-pFe" id="8GK-op-qNa">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2G-gx-ub2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <state key="normal" title="Delete Subroutine">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteSubroutineButtonTapped:" destination="qsp-1w-wal" eventType="touchUpInside" id="iBM-EI-Ybu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="j2G-gx-ub2" secondAttribute="trailing" id="GUd-98-kDH"/>
+                                                <constraint firstItem="j2G-gx-ub2" firstAttribute="top" secondItem="8GK-op-qNa" secondAttribute="top" id="OPI-Cz-x6C"/>
+                                                <constraint firstAttribute="bottom" secondItem="j2G-gx-ub2" secondAttribute="bottom" id="V2g-br-VSn"/>
+                                                <constraint firstItem="j2G-gx-ub2" firstAttribute="leading" secondItem="8GK-op-qNa" secondAttribute="leading" id="brZ-pO-lxX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -479,116 +517,26 @@
                             <outlet property="delegate" destination="qsp-1w-wal" id="DNf-hS-SiI"/>
                         </connections>
                     </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xax-zh-2AG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="885" y="1686.9718309859154"/>
-        </scene>
-        <!--Routine Add Edit View Controller-->
-        <scene sceneID="K07-zI-3aB">
-            <objects>
-                <viewController id="6Z3-4l-5e1" customClass="RoutineAddEditViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cZY-AW-OBN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kj4-0X-Cw5">
-                                <rect key="frame" x="16" y="88" width="41" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3yJ-CE-SuR">
-                                <rect key="frame" x="16" y="220" width="288" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="descTextFieldEditing:" destination="6Z3-4l-5e1" eventType="editingChanged" id="Eam-Vg-P43"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8m-ps-yBq">
-                                <rect key="frame" x="24" y="514" width="272" height="30"/>
-                                <state key="normal" title="Delete Subroutine"/>
-                                <connections>
-                                    <action selector="deleteSubroutineButtonTapped:" destination="6Z3-4l-5e1" eventType="touchUpInside" id="oA0-Np-kf0"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MJ-QQ-r3V">
-                                <rect key="frame" x="16" y="191" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pWR-Be-kYA">
-                                <rect key="frame" x="16" y="117" width="288" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="zLv-cp-ECH"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="SR7-rb-kbQ">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="availableIconCell" id="PGP-f8-Bbq" customClass="AvailableIconsCollectionViewCell" customModule="Planner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="6Z3-4l-5e1" id="3hW-fN-RnE"/>
-                                    <outlet property="delegate" destination="6Z3-4l-5e1" id="DTF-Ut-cJF"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="iqc-Rt-eWV" firstAttribute="trailing" secondItem="pWR-Be-kYA" secondAttribute="trailing" constant="16" id="6ub-Zf-hN2"/>
-                            <constraint firstItem="3MJ-QQ-r3V" firstAttribute="top" secondItem="pWR-Be-kYA" secondAttribute="bottom" constant="24" id="FnQ-w0-aT6"/>
-                            <constraint firstItem="Kj4-0X-Cw5" firstAttribute="top" secondItem="iqc-Rt-eWV" secondAttribute="top" constant="24" id="GZO-e6-y7X"/>
-                            <constraint firstItem="iqc-Rt-eWV" firstAttribute="bottom" secondItem="Q8m-ps-yBq" secondAttribute="bottom" constant="24" id="JUL-I8-ieP"/>
-                            <constraint firstItem="3yJ-CE-SuR" firstAttribute="leading" secondItem="iqc-Rt-eWV" secondAttribute="leading" constant="16" id="JVm-n8-bm8"/>
-                            <constraint firstItem="3yJ-CE-SuR" firstAttribute="top" secondItem="3MJ-QQ-r3V" secondAttribute="bottom" constant="8" id="YmF-hf-39x"/>
-                            <constraint firstItem="pWR-Be-kYA" firstAttribute="top" secondItem="Kj4-0X-Cw5" secondAttribute="bottom" constant="8" id="h0s-IB-VA9"/>
-                            <constraint firstItem="Q8m-ps-yBq" firstAttribute="leading" secondItem="iqc-Rt-eWV" secondAttribute="leading" constant="24" id="iRy-j7-mjP"/>
-                            <constraint firstItem="iqc-Rt-eWV" firstAttribute="trailing" secondItem="Q8m-ps-yBq" secondAttribute="trailing" constant="24" id="mo0-JH-Tzu"/>
-                            <constraint firstItem="pWR-Be-kYA" firstAttribute="leading" secondItem="iqc-Rt-eWV" secondAttribute="leading" constant="16" id="nae-82-HPf"/>
-                            <constraint firstItem="3MJ-QQ-r3V" firstAttribute="leading" secondItem="iqc-Rt-eWV" secondAttribute="leading" constant="16" id="oGH-YH-62T"/>
-                            <constraint firstItem="iqc-Rt-eWV" firstAttribute="trailing" secondItem="3yJ-CE-SuR" secondAttribute="trailing" constant="16" id="odo-5c-25o"/>
-                            <constraint firstItem="Kj4-0X-Cw5" firstAttribute="leading" secondItem="iqc-Rt-eWV" secondAttribute="leading" constant="16" id="yOb-Ap-b8T"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="iqc-Rt-eWV"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="foM-iZ-idN">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1Qn-l2-kQC">
+                    <navigationItem key="navigationItem" id="eoH-Q1-zh8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5rD-TY-KnF">
                             <connections>
-                                <segue destination="ykd-1D-8ik" kind="unwind" identifier="canceladdEditVC" unwindAction="unwindToRoutineDetailVCWithSegue:" id="s28-og-tk3"/>
+                                <action selector="cancelBarButtonTapped:" destination="qsp-1w-wal" id="8xg-na-WK4"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="XB4-5Y-oB9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Opb-IU-LTo">
                             <connections>
-                                <action selector="saveBarButtonTapped:" destination="6Z3-4l-5e1" id="BvH-4b-yAD"/>
+                                <action selector="saveBarButtonTapped:" destination="qsp-1w-wal" id="3dx-Sj-As6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="availableIconsCollectionView" destination="pWR-Be-kYA" id="t02-VV-wlE"/>
-                        <outlet property="descTextField" destination="3yJ-CE-SuR" id="hou-CC-QOd"/>
-                        <segue destination="ykd-1D-8ik" kind="unwind" identifier="deleteSubroutine" unwindAction="unwindToRoutineDetailVCWithSegue:" id="xGt-Ai-ydR"/>
-                        <segue destination="ykd-1D-8ik" kind="unwind" identifier="cancelSubroutine" unwindAction="unwindToRoutineDetailVCWithSegue:" id="AXF-EY-nAh"/>
+                        <outlet property="availableIconsCollectionView" destination="SNh-sx-ri6" id="GC4-Sl-L9f"/>
+                        <outlet property="descTextField" destination="a51-TJ-5MD" id="R7l-5i-Fa2"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UlD-GF-ejB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="ykd-1D-8ik" userLabel="Exit" sceneMemberID="exit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xax-zh-2AG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8" y="1719"/>
+            <point key="canvasLocation" x="885" y="1686.9718309859154"/>
         </scene>
     </scenes>
     <resources>
@@ -596,6 +544,6 @@
         <image name="setting-off" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="H5h-kI-i8S"/>
+        <segue reference="Hra-WU-9Q8"/>
     </inferredMetricsTieBreakers>
 </document>

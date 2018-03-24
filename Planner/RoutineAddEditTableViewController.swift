@@ -14,7 +14,7 @@ protocol addEditCompletedDelegate : class {
     func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: IndexPath)
 }
 
-class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class RoutineAddEditTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var descTextField: UITextField!
     @IBOutlet weak var availableIconsCollectionView: UICollectionView!
@@ -36,6 +36,9 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
     // ---------------------
     @IBAction func descTextFieldEditing(_ sender: UITextField) {
         desc = sender.text
+    }
+    @IBAction func cancelBarButtonTapped(_ sender: UIBarButtonItem) {
+        popToRoutineDetailVC()
     }
     
     @IBAction func saveBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -127,8 +130,15 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
                 
             }
         }
-    }
+        
+        // Toggle save button
+        if selectedIndex == nil {
+            self.navigationItem.rightBarButtonItem?.isEnabled = false;
+        }
+        
     
+    }
+        
     // ---------------------
     // Collection View
     // ---------------------
@@ -162,6 +172,14 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         return cell
     }
     
+    func updateIfSaveButtonEnabled() {
+        if selectedIndex == nil {
+            self.navigationItem.rightBarButtonItem?.isEnabled = false;
+        } else {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true;
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // if same selection, deselect
         if selectedIndex == indexPath.row {
@@ -169,6 +187,8 @@ class RoutineAddEditViewController: UIViewController, UICollectionViewDataSource
         } else {
             selectedIndex = indexPath.row
         }
+        
+        updateIfSaveButtonEnabled()
     
         availableIconsCollectionView.reloadData()
     }
