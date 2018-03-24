@@ -16,14 +16,17 @@ let popoverHeight = 50
 
 protocol IconsContainerDelegate: class {
     func triggerNewSubroutine()
+    
+    //depr
     func triggerEditSubroutine(at indexPath: IndexPath)
+    //depr
     func triggerDeleteSubroutine(at indexPath: IndexPath)
     
     func reloadRoutineDetailVC()
     func updateCurrentSubroutine(with newSubIndex: Int)
 }
 
-class IconsCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, IconPopoverDelegate {
+class IconsCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     
     
@@ -44,31 +47,32 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
 
     
     @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
-        if (gestureRecognizer.state != UIGestureRecognizerState.began){
-            return
-        }
-        let p = gestureRecognizer.location(in: self.collectionView)
-        if let indexPath : IndexPath = (self.collectionView?.indexPathForItem(at: p)){
-            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
-                as! IconPopoverViewController
-            popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
-            popoverController.delegate = self
-            popoverController.cellIndexPath = indexPath
-            
-            
-            if let popover: UIPopoverPresentationController =
-                popoverController.popoverPresentationController {
-                let sourceView = self.collectionView?.cellForItem(at: indexPath)
-                popover.delegate = self
-                popover.permittedArrowDirections = .up
-                popoverController.preferredContentSize = CGSize(width: popoverWidth, height: popoverHeight)
-                //            popover.backgroundColor = popoverController.view.backgroundColor
-                popover.sourceView = sourceView
-                popover.sourceRect = sourceView!.bounds
-            }
-            present(popoverController, animated: true, completion: nil)
-        }
+//        if (gestureRecognizer.state != UIGestureRecognizerState.began){
+//            return
+//        }
+//        let p = gestureRecognizer.location(in: self.collectionView)
+//        if let indexPath : IndexPath = (self.collectionView?.indexPathForItem(at: p)){
+//
+//            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
+//                as! IconPopoverViewController
+//            popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
+//            popoverController.delegate = self
+//            popoverController.cellIndexPath = indexPath
+//
+//
+//            if let popover: UIPopoverPresentationController =
+//                popoverController.popoverPresentationController {
+//                let sourceView = self.collectionView?.cellForItem(at: indexPath)
+//                popover.delegate = self
+//                popover.permittedArrowDirections = .up
+//                popoverController.preferredContentSize = CGSize(width: popoverWidth, height: popoverHeight)
+//                //            popover.backgroundColor = popoverController.view.backgroundColor
+//                popover.sourceView = sourceView
+//                popover.sourceRect = sourceView!.bounds
+//            }
+//            present(popoverController, animated: true, completion: nil)
+//        }
         
         
     }

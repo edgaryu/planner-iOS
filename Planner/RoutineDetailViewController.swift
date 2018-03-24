@@ -13,7 +13,7 @@ import SnapKit
 //    static let iconSize = 50
 //}
 
-class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate, UIPopoverPresentationControllerDelegate {
+class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate, UIPopoverPresentationControllerDelegate, RoutineEditPopoverDelegate {
     
     var actionTVC: RoutineActionTableViewController?
     var iconsCVC: IconsCollectionViewController?
@@ -57,15 +57,27 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         subroutines[currentSubroutine].actions = newActions
     }
     
+    // RoutineEditPopover
+    func editRoutineTitle(with newTitle: String) {
+        routineTitle = newTitle
+        self.title = routineTitle
+    }
+    func deleteRoutine() {
+        
+    }
+    
+    
     // IconsContainerDelegate functions
     @objc func triggerNewSubroutine() {
         performSegue(withIdentifier: "triggerAddSubroutine", sender: Any?.self)
     }
+    // delete, depr
     func triggerEditSubroutine(at indexPath: IndexPath) {
         toEditSubroutineIndex = indexPath
         performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
         toEditSubroutineIndex = nil
     }
+    // delete, depr
     func triggerDeleteSubroutine(at indexPath: IndexPath) {
         deleteSubroutine(at: indexPath)
     }
@@ -184,8 +196,33 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //    }
     
     // ---------------------
-    // Edit actions
+    // Edit routine popover
     // ---------------------
+    
+    @objc func routineEditBarButtonTapped(_ sender: Any) {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "routineEditVC")
+            as! RoutineEditPopoverViewController
+        vc.delegate = self
+        vc.modalPresentationStyle = .popover
+        vc.routineTitle = routineTitle
+        
+        
+        vc.preferredContentSize = CGSize(width: self.view.frame.width, height: 150)
+        
+        let ppc = vc.popoverPresentationController
+        ppc?.permittedArrowDirections = .any
+        ppc?.delegate = self
+        ppc?.barButtonItem = navigationItem.rightBarButtonItem
+
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     
     // ---------------------
     // Add new action (textfield) (DATA)
@@ -270,13 +307,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set VC title
-//        if (subroutines.count == 0 && routineTitle == nil) {
-//            self.title = "New Routine"
-//        } else {
-//            self.title = routineTitle
-//        }
         self.title = routineTitle
+        
         // Initialize view with data
         if (subroutines.count != 0) {
             descTextLabel.text = subroutines[currentSubroutine].desc ?? ""
@@ -291,6 +323,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         // add icon button
         addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
         addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(routineEditBarButtonTapped(_:)))
         
 
         //

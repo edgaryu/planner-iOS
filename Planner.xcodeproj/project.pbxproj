@@ -18,7 +18,7 @@
 		5D8D6EE4203FC88A00D78333 /* IconsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */; };
 		5DC1C8BD2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */; };
 		5DC1C8BF20560A480095C726 /* CurrentIconsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */; };
-		5DC1C8C12058BEB30095C726 /* IconPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8C02058BEB30095C726 /* IconPopoverViewController.swift */; };
+		5DC1C8C12058BEB30095C726 /* RoutineEditPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C8C02058BEB30095C726 /* RoutineEditPopoverViewController.swift */; };
 		5DC867FF200C45DC009FF59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC867FE200C45DC009FF59F /* AppDelegate.swift */; };
 		5DC86804200C45DC009FF59F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86802200C45DC009FF59F /* Main.storyboard */; };
 		5DC86806200C45DC009FF59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC86805200C45DC009FF59F /* Assets.xcassets */; };
@@ -59,7 +59,7 @@
 		5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsCollectionViewController.swift; sourceTree = "<group>"; };
 		5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoutineDetailViewController+UICustomization.swift"; sourceTree = "<group>"; };
 		5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentIconsCollectionViewCell.swift; sourceTree = "<group>"; };
-		5DC1C8C02058BEB30095C726 /* IconPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPopoverViewController.swift; sourceTree = "<group>"; };
+		5DC1C8C02058BEB30095C726 /* RoutineEditPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineEditPopoverViewController.swift; sourceTree = "<group>"; };
 		5DC867FB200C45DC009FF59F /* Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC867FE200C45DC009FF59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DC86803200C45DC009FF59F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */,
 				5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */,
 				5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */,
-				5DC1C8C02058BEB30095C726 /* IconPopoverViewController.swift */,
+				5DC1C8C02058BEB30095C726 /* RoutineEditPopoverViewController.swift */,
 				5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */,
 				5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */,
 				5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */,
@@ -420,7 +420,7 @@
 				5D8D6EE4203FC88A00D78333 /* IconsCollectionViewController.swift in Sources */,
 				5DC86813200C489D009FF59F /* Routine.swift in Sources */,
 				5D81BD1D2034101400937082 /* addIconCollectionViewCell.swift in Sources */,
-				5DC1C8C12058BEB30095C726 /* IconPopoverViewController.swift in Sources */,
+				5DC1C8C12058BEB30095C726 /* RoutineEditPopoverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -179,13 +179,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="Ygf-U3-Jsc"/>
                     </view>
-                    <navigationItem key="navigationItem" id="frI-6W-u24">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="GVt-Ud-hkL">
-                            <connections>
-                                <segue destination="avy-hr-50d" kind="unwind" identifier="saveAddRoutine" unwindAction="unwindToListWithSegue:" id="Fpc-U1-l2C"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="frI-6W-u24"/>
                     <connections>
                         <outlet property="actionTextField" destination="kaW-jR-4Rk" id="LUe-7j-XVd"/>
                         <outlet property="actionsContainerView" destination="pbq-ra-CPi" id="krN-3w-PDT"/>
@@ -224,7 +218,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DR6-7y-3k4" id="qLi-Zu-cMB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -273,71 +267,101 @@
             </objects>
             <point key="canvasLocation" x="1166" y="601"/>
         </scene>
-        <!--Icon Popover View Controller-->
+        <!--Routine Edit Popover View Controller-->
         <scene sceneID="z1f-Tt-sNV">
             <objects>
-                <viewController storyboardIdentifier="iconPopover" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" id="x8G-5e-0tK" customClass="IconPopoverViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="routineEditVC" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" id="x8G-5e-0tK" customClass="RoutineEditPopoverViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L2d-g7-gb5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hcj-Dr-Bjf">
-                                <rect key="frame" x="141.5" y="261.5" width="37" height="45"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLx-rU-d3C">
+                                <rect key="frame" x="0.0" y="20" width="320" height="150"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-dC-qcX">
-                                        <rect key="frame" x="0.0" y="0.0" width="37" height="45"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Yar-n1-CAz">
+                                        <rect key="frame" x="8" y="8" width="304" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f30-GQ-i7A">
-                                                <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="fMq-IL-tNH"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <state key="normal" title="Edit"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VII-ah-NKf">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="X"/>
                                                 <connections>
-                                                    <action selector="editButtonTapped:" destination="x8G-5e-0tK" eventType="touchUpInside" id="OP5-0j-jwf"/>
+                                                    <action selector="cancelRoutineEdit:" destination="x8G-5e-0tK" eventType="touchUpInside" id="lTu-G7-6m9"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvX-0q-T0z" userLabel="Delete Button">
-                                                <rect key="frame" x="0.0" y="25" width="37" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="Pw2-t8-OK0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <state key="normal" title="Delete">
-                                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Edit Routine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBU-BG-jdM">
+                                                <rect key="frame" x="104" y="0.0" width="92" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQj-TN-cpy">
+                                                <rect key="frame" x="270" y="0.0" width="34" height="30"/>
+                                                <state key="normal" title="Save"/>
                                                 <connections>
-                                                    <action selector="deleteButtonTapped:" destination="x8G-5e-0tK" eventType="touchUpInside" id="c9i-W2-eT6"/>
+                                                    <action selector="saveRoutineEdit:" destination="x8G-5e-0tK" eventType="touchUpInside" id="vUK-jS-0Lq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDb-MJ-2Wq">
+                                        <rect key="frame" x="109.5" y="120" width="101" height="30"/>
+                                        <state key="normal" title="Delete Routine">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteButtonTapped:" destination="x8G-5e-0tK" eventType="touchUpInside" id="lBz-w1-MqS"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Routine title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMm-bX-8oO">
+                                        <rect key="frame" x="8" y="54" width="304" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xDP-WF-bUU">
+                                        <rect key="frame" x="8" y="78.5" width="304" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="routineTitleEditing:" destination="x8G-5e-0tK" eventType="editingChanged" id="Eyc-Ra-DcO"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="1cf-dC-qcX" secondAttribute="trailing" id="Tgd-Ih-EH3"/>
-                                    <constraint firstItem="1cf-dC-qcX" firstAttribute="leading" secondItem="Hcj-Dr-Bjf" secondAttribute="leading" id="Vjx-9e-OYa"/>
-                                    <constraint firstItem="1cf-dC-qcX" firstAttribute="top" secondItem="Hcj-Dr-Bjf" secondAttribute="top" id="apl-fb-NKt"/>
-                                    <constraint firstAttribute="bottom" secondItem="1cf-dC-qcX" secondAttribute="bottom" id="kuf-fN-QXU"/>
+                                    <constraint firstItem="eDb-MJ-2Wq" firstAttribute="centerX" secondItem="mLx-rU-d3C" secondAttribute="centerX" id="1wQ-yJ-tid"/>
+                                    <constraint firstItem="Yar-n1-CAz" firstAttribute="top" secondItem="mLx-rU-d3C" secondAttribute="top" constant="8" id="80E-sL-HaO"/>
+                                    <constraint firstAttribute="bottom" secondItem="eDb-MJ-2Wq" secondAttribute="bottom" id="8yw-ic-ms0"/>
+                                    <constraint firstItem="TMm-bX-8oO" firstAttribute="top" secondItem="Yar-n1-CAz" secondAttribute="bottom" constant="16" id="ICx-7z-fvy"/>
+                                    <constraint firstItem="xDP-WF-bUU" firstAttribute="top" secondItem="TMm-bX-8oO" secondAttribute="bottom" constant="8" id="XEk-l8-go6"/>
+                                    <constraint firstAttribute="trailing" secondItem="xDP-WF-bUU" secondAttribute="trailing" constant="8" id="chy-UT-j11"/>
+                                    <constraint firstItem="Yar-n1-CAz" firstAttribute="leading" secondItem="mLx-rU-d3C" secondAttribute="leading" constant="8" id="dcO-Kf-Q9y"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yar-n1-CAz" secondAttribute="trailing" constant="8" id="g6L-RF-Ihg"/>
+                                    <constraint firstItem="TMm-bX-8oO" firstAttribute="leading" secondItem="mLx-rU-d3C" secondAttribute="leading" constant="8" id="gqA-fp-Bio"/>
+                                    <constraint firstAttribute="trailing" secondItem="TMm-bX-8oO" secondAttribute="trailing" constant="8" id="mN9-hR-LYn"/>
+                                    <constraint firstAttribute="height" constant="150" id="nW5-f2-Mgf"/>
+                                    <constraint firstItem="xDP-WF-bUU" firstAttribute="leading" secondItem="mLx-rU-d3C" secondAttribute="leading" constant="8" id="uGL-HY-RRe"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hcj-Dr-Bjf" firstAttribute="centerX" secondItem="L2d-g7-gb5" secondAttribute="centerX" id="TBs-31-Vho"/>
-                            <constraint firstItem="Hcj-Dr-Bjf" firstAttribute="centerY" secondItem="L2d-g7-gb5" secondAttribute="centerY" id="vw3-kR-EZ3"/>
+                            <constraint firstItem="QCG-Tg-sNT" firstAttribute="trailing" secondItem="mLx-rU-d3C" secondAttribute="trailing" id="9md-s8-QGL"/>
+                            <constraint firstItem="mLx-rU-d3C" firstAttribute="top" secondItem="QCG-Tg-sNT" secondAttribute="top" id="aUO-X7-jsE"/>
+                            <constraint firstItem="mLx-rU-d3C" firstAttribute="leading" secondItem="QCG-Tg-sNT" secondAttribute="leading" id="eOT-oy-8Ti"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QCG-Tg-sNT"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="100" height="100"/>
                     <connections>
-                        <outlet property="editButton" destination="f30-GQ-i7A" id="mua-Lg-VtB"/>
+                        <outlet property="routineTitleTextField" destination="xDP-WF-bUU" id="ExI-xQ-x6S"/>
+                        <outlet property="saveRoutineButton" destination="rQj-TN-cpy" id="1lN-Cg-dad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFs-Uc-Y8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813" y="875"/>
+            <point key="canvasLocation" x="1811.25" y="874.64788732394368"/>
         </scene>
         <!--Routine Action Table View Controller-->
         <scene sceneID="05j-HM-ytU">
