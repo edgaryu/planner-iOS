@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D3BE267204F1E9B006844B9 /* RoutineAddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BE266204F1E9B006844B9 /* RoutineAddEditViewController.swift */; };
+		5D3BE267204F1E9B006844B9 /* RoutineAddEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */; };
 		5D411B1B2025951A002DAE02 /* RoutineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */; };
 		5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */; };
 		5D411B1F202D032B002DAE02 /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */; };
@@ -48,7 +48,7 @@
 /* Begin PBXFileReference section */
 		3EE67156EFC3B942D49BEA7B /* Pods_Planner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Planner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		471A1C6F9B96E112ED0BE636 /* Pods-PlannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlannerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlannerTests/Pods-PlannerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5D3BE266204F1E9B006844B9 /* RoutineAddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineAddEditViewController.swift; sourceTree = "<group>"; };
+		5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineAddEditTableViewController.swift; sourceTree = "<group>"; };
 		5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailViewController.swift; sourceTree = "<group>"; };
 		5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineActionTableViewController.swift; sourceTree = "<group>"; };
 		5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */,
 				5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */,
 				5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */,
-				5D3BE266204F1E9B006844B9 /* RoutineAddEditViewController.swift */,
+				5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */,
 				5D8B7E6A204F34B300562B49 /* AvailableIconsCollectionViewCell.swift */,
 				5DC1C8BE20560A480095C726 /* CurrentIconsCollectionViewCell.swift */,
 				5DC86812200C489D009FF59F /* Routine.swift */,
@@ -409,7 +409,7 @@
 				5D8B7E6B204F34B300562B49 /* AvailableIconsCollectionViewCell.swift in Sources */,
 				5DC1C8BD2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift in Sources */,
 				5DC86811200C46B8009FF59F /* RoutineListTableViewController.swift in Sources */,
-				5D3BE267204F1E9B006844B9 /* RoutineAddEditViewController.swift in Sources */,
+				5D3BE267204F1E9B006844B9 /* RoutineAddEditTableViewController.swift in Sources */,
 				5D411B1B2025951A002DAE02 /* RoutineDetailViewController.swift in Sources */,
 				5DC86815200C48D3009FF59F /* Action.swift in Sources */,
 				5DC8681F200DB2E1009FF59F /* EditRoutineTitleCell.swift in Sources */,

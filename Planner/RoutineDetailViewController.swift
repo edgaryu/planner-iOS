@@ -111,15 +111,21 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         
         let newSubroutine = Subroutine(newIconPath: newIconPath, newDesc: newDesc)
         subroutines.append(newSubroutine)
+        
+        currentSubroutine = subroutines.count-1
+        iconsCVC?.selectedIndex = currentSubroutine
+        
         reloadRoutineDetailVC()
     }
     func deleteSubroutine(at toEditSubroutineIndex: IndexPath) {
         subroutines.remove(at: toEditSubroutineIndex.row)
         
         // if currentIndex no longer in range
-        if (currentSubroutine >= subroutines.count) {
+        if (currentSubroutine >= subroutines.count || currentSubroutine == toEditSubroutineIndex.row) {
             currentSubroutine = 0
         }
+        
+        iconsCVC?.selectedIndex = currentSubroutine
         reloadRoutineDetailVC()
     }
     func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: IndexPath) {
@@ -303,6 +309,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //        for subroutine in subroutines {
 //            print("\(subroutine.desc ?? "") ")
 //            print("\(subroutine.actions.count) ")
+//            print("\(subroutine.iconPath ?? "")")
 //        }
     }
 
@@ -328,19 +335,19 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
             iconsCVC?.subroutines = self.subroutines
             iconsCVC?.delegate = self
         }
-        if let addEditVC = segue.destination as? RoutineAddEditViewController {
+        if let addEditVC = segue.destination as? RoutineAddEditTableViewController {
             addEditVC.delegate = self
         }
 
         // External segues
         if segue.identifier == "triggerAddSubroutine" {
-            if let routineAddEditVC = segue.destination as? RoutineAddEditViewController {
+            if let routineAddEditVC = segue.destination as? RoutineAddEditTableViewController {
                 routineAddEditVC.newSubroutineState = true
             }
         }
         
         if segue.identifier == "triggerEditSubroutine" {
-            if let routineAddEditVC = segue.destination as? RoutineAddEditViewController {
+            if let routineAddEditVC = segue.destination as? RoutineAddEditTableViewController {
                 routineAddEditVC.newSubroutineState = false
                 
                 if let toEditSubroutineIndex = toEditSubroutineIndex {
