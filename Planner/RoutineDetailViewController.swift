@@ -13,14 +13,22 @@ import SnapKit
 //    static let iconSize = 50
 //}
 
+protocol SyncDetailWithListDelegate: class {
+    func syncWithList(with routines: [Routine])
+    func deleteRoutine(at index: Int)
+}
+
 class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate, UIPopoverPresentationControllerDelegate, RoutineEditPopoverDelegate {
     
     var actionTVC: RoutineActionTableViewController?
     var iconsCVC: IconsCollectionViewController?
     
     // From List to DetailVC
+    var routines = [Routine]()
     var subroutines = [Subroutine]()
     var routineTitle: String?
+    var currentRoutine = 0 // used only when saving to storage
+    var delegate: SyncDetailWithListDelegate?
     
     // Self
     var currentSubroutine = 0
@@ -54,16 +62,27 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     // RoutineAction functions
     func updateActions(with newActions: [Action]) {
+        
         subroutines[currentSubroutine].actions = newActions
+        saveRoutinesToStorage()
     }
     
     // RoutineEditPopover
     func editRoutineTitle(with newTitle: String) {
         routineTitle = newTitle
         self.title = routineTitle
+        
+        saveRoutinesToStorage()
     }
     func deleteRoutine() {
-        
+        // pop, then save in RoutineList.
+        delegate?.deleteRoutine(at: currentRoutine)
+        popToRoutineListTVC()
+    }
+    private func popToRoutineListTVC() {
+        if let routineListTVC = navigationController?.viewControllers[0] as? RoutineListTableViewController {
+            navigationController?.popToViewController(routineListTVC, animated: true)
+        }
     }
     
     
@@ -71,16 +90,16 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     @objc func triggerNewSubroutine() {
         performSegue(withIdentifier: "triggerAddSubroutine", sender: Any?.self)
     }
-    // delete, depr
-    func triggerEditSubroutine(at indexPath: IndexPath) {
-        toEditSubroutineIndex = indexPath
-        performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
-        toEditSubroutineIndex = nil
-    }
-    // delete, depr
-    func triggerDeleteSubroutine(at indexPath: IndexPath) {
-        deleteSubroutine(at: indexPath)
-    }
+    // depr, change
+//    func triggerEditSubroutine(at indexPath: IndexPath) {
+//        toEditSubroutineIndex = indexPath
+//        performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
+//        toEditSubroutineIndex = nil
+//    }
+    // depr, change
+//    func triggerDeleteSubroutine(at indexPath: IndexPath) {
+//        deleteSubroutine(at: indexPath)
+//    }
     func updateCurrentSubroutine(with newSubIndex: Int) {
         currentSubroutine = newSubIndex
     }
@@ -123,6 +142,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         
         let newSubroutine = Subroutine(newIconPath: newIconPath, newDesc: newDesc)
         subroutines.append(newSubroutine)
+        saveRoutinesToStorage()
         
         currentSubroutine = subroutines.count-1
         iconsCVC?.selectedIndex = currentSubroutine
@@ -131,6 +151,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     }
     func deleteSubroutine(at toEditSubroutineIndex: IndexPath) {
         subroutines.remove(at: toEditSubroutineIndex.row)
+        saveRoutinesToStorage()
         
         // if currentIndex no longer in range
         if (currentSubroutine >= subroutines.count || currentSubroutine == toEditSubroutineIndex.row) {
@@ -153,6 +174,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
             subroutines[subroutineIndex.row].desc = nil
         }
         
+        saveRoutinesToStorage()
         reloadRoutineDetailVC()
     }
     
@@ -163,9 +185,13 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         
     }
     
-//    func saveRoutinesToStorage() {
-//        Routine.saveToFile(routines: self.subroutines)
-//    }
+    // save routines to file
+    private func saveRoutinesToStorage() {
+        self.routines[currentRoutine].subroutines = self.subroutines
+        self.routines[currentRoutine].routineTitle = self.routineTitle ?? ""
+        Routine.saveToFile(routines: self.routines)
+        delegate?.syncWithList(with: self.routines)
+    }
     
     // ---------------------
     // ICONS: Current icon + icons container view
@@ -250,6 +276,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         }
         
         subroutines[currentSubroutine].actions.append(Action(actionTitle: newAction))
+        saveRoutinesToStorage()
+        
         actionTVC?.actions = self.subroutines[currentSubroutine].actions
         actionTVC?.tableView.reloadData()
         actionTextField.resignFirstResponder()

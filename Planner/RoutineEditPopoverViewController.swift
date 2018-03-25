@@ -52,9 +52,8 @@ class RoutineEditPopoverViewController: UIViewController {
     
     // Delete button
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        
-        
-//            delegate?.deleteSubroutine(at: cellIndexPath)
+        dismiss(animated: true, completion: nil)
+        delegate?.deleteRoutine()
     }
     
     override func viewDidLoad() {

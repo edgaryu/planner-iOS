@@ -8,45 +8,24 @@
 
 import UIKit
 
-//private let reuseIdentifier = "Cell"
-
 let iconSize = 50
 let popoverWidth = 50
 let popoverHeight = 50
 
 protocol IconsContainerDelegate: class {
-    func triggerNewSubroutine()
-    
-    //depr
-    func triggerEditSubroutine(at indexPath: IndexPath)
-    //depr
-    func triggerDeleteSubroutine(at indexPath: IndexPath)
-    
     func reloadRoutineDetailVC()
     func updateCurrentSubroutine(with newSubIndex: Int)
 }
 
-class IconsCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class IconsCollectionViewController: UICollectionViewController  {
     
-    
-    
-//    var icons = [UIColor]()
     var delegate : IconsContainerDelegate?
     var subroutines = [Subroutine]()
     var selectedIndex = 0
     
     // Delegate functions
-    func editSubroutine(at indexPath: IndexPath) {
-        dismiss(animated: true, completion: nil)
-        delegate?.triggerEditSubroutine(at: indexPath)
-    }
-    func deleteSubroutine(at indexPath: IndexPath) {
-        dismiss(animated: true, completion: nil)
-        delegate?.triggerDeleteSubroutine(at: indexPath)
-    }
-
     
-    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+//    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
 //        if (gestureRecognizer.state != UIGestureRecognizerState.began){
 //            return
 //        }
@@ -73,13 +52,8 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
 //            }
 //            present(popoverController, animated: true, completion: nil)
 //        }
-        
-        
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
+//    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,11 +61,11 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delegate = self
-        lpgr.delaysTouchesBegan = true
-        self.collectionView?.addGestureRecognizer(lpgr)
+//        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+//        lpgr.minimumPressDuration = 0.5
+//        lpgr.delegate = self
+//        lpgr.delaysTouchesBegan = true
+//        self.collectionView?.addGestureRecognizer(lpgr)
     }
     
     // MARK: UICollectionViewDataSource
@@ -108,45 +82,18 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "currentIconCell", for: indexPath) as! CurrentIconsCollectionViewCell
-//        let editButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
         cell.cellIndex = indexPath.row
         
-        
-        // last collectionViewCell is the add button
-//        if (indexPath.row == subroutines.count) {
-//            cell.setButtonImage(with: "icons8-plus-math-40")
-//
-////            let cell1 = self.collectionView?.cellForItem(at: indexPath) as! CurrentIconsCollectionViewCell
-////            print("\(indexPath.row), \(cell1.cellIndex)")
-//
-////            cell.iconButton?.addTarget(self, action: #selector(addIconButtonTapped), for: UIControlEvents.touchUpInside)
-//            print("cfrw")
-////            cell.iconButton?.isUserInteractionEnabled = true
-//
-//        }
-        
-        // icon collection cell
-//        else {
-            // if iconPath exists, set button img
-            if let iconPath = subroutines[indexPath.row].iconPath {
-                cell.setButtonImage(with: iconPath)
-            }
-            
-//            if let iconPath = subroutines[indexPath.row] {
-//                let icon = UIImage(named: iconPath)
-//                editButton.setImage(icon, for: UIControlState.normal)
-//            }
-//            editButton.isUserInteractionEnabled = false
-            
-            // if does not exist, leave blank
-//        }
-        
+        if let iconPath = subroutines[indexPath.row].iconPath {
+            cell.setButtonImage(with: iconPath)
+        }
+
         // Change border of selected / deselected cells
         if cell.cellIndex == selectedIndex {
             cell.iconButton?.layer.borderColor = UIColor.red.cgColor
             cell.iconButton?.layer.borderWidth = 2
         } else {
-            //            cell.layer.borderColor = UIColor.cgColor
+//            cell.layer.borderColor = UIColor.cgColor
             cell.iconButton?.layer.borderWidth = 0
         }
         
@@ -158,23 +105,16 @@ class IconsCollectionViewController: UICollectionViewController, UIGestureRecogn
 //        let cell1 = self.collectionView?.cellForItem(at: indexPath) as! CurrentIconsCollectionViewCell
 //        print("\(indexPath.row), \(cell1.cellIndex)")
 //        self.collectionView?.cellForItem(at: indexPath.row)
-        if (selectedIndex == indexPath.row) {
-            print("Same")
-            return
-        }
         
         // return if selected last cell or if selected same index
-        if (indexPath.row == subroutines.count) {
-            print("End")
+        if (selectedIndex == indexPath.row || indexPath.row == subroutines.count) {
             return
         }
-        
         
         // else, change selectedIndex, reload iconsCollection, then call delegate to reload actionsTVC and desc
         selectedIndex = indexPath.row
         delegate?.updateCurrentSubroutine(with: selectedIndex)
         delegate?.reloadRoutineDetailVC()
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

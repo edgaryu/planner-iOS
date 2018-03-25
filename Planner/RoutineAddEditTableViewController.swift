@@ -99,11 +99,6 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
             
         }))
         self.present(deleteSubroutineAlert, animated: true, completion: nil)
-        
-        // if only 1 subroutine (auto init) -> not saved, so back
-        // if only 1 subroutine (saved) -> remove subroutine, unwind
-        
-        // if 1+ subroutine, delete, switch to next in index.
     }
     
     
@@ -127,7 +122,6 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
                     selectedIndex = iconsArray.index(of: toEditIconPath)
                     availableIconsCollectionView.reloadData()
                 }
-                
             }
         }
         
@@ -135,8 +129,6 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
         if selectedIndex == nil {
             self.navigationItem.rightBarButtonItem?.isEnabled = false;
         }
-        
-    
     }
         
     // ---------------------
