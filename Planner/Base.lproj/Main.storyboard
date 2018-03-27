@@ -108,11 +108,17 @@
                                                 <rect key="frame" x="213" y="0.0" width="46" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editSubroutineButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="TiJ-SP-2wv"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f37-3m-MoO">
                                                 <rect key="frame" x="274" y="0.0" width="46" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Add"/>
+                                                <connections>
+                                                    <action selector="addSubroutineButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="Iku-JK-nsa"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subroutines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFU-JY-p3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="25"/>

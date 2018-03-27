@@ -10,8 +10,8 @@ import UIKit
 
 protocol addEditCompletedDelegate : class {
     func addNewSubroutine(iconPath: String?, desc: String?)
-    func deleteSubroutine(at toEditSubroutineIndex: IndexPath)
-    func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: IndexPath)
+    func deleteSubroutine(at toEditSubroutineIndex: Int)
+    func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: Int)
 }
 
 class RoutineAddEditTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -24,7 +24,7 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
     
     // only if in editing subroutine state
     var toEditIconPath: String?
-    var toEditSubroutineIndex: IndexPath?
+    var toEditSubroutineIndex: Int?
     
     var iconsArray = [String]()
     

@@ -32,7 +32,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     // Self
     var currentSubroutine = 0
-    var toEditSubroutineIndex : IndexPath?
+    var toEditSubroutineIndex : Int?
     
     // Toggles
     var editActionsMode = false
@@ -94,19 +94,6 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     
     // IconsContainerDelegate functions
-    @objc func triggerNewSubroutine() {
-        performSegue(withIdentifier: "triggerAddSubroutine", sender: Any?.self)
-    }
-    // depr, change
-//    func triggerEditSubroutine(at indexPath: IndexPath) {
-//        toEditSubroutineIndex = indexPath
-//        performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
-//        toEditSubroutineIndex = nil
-//    }
-    // depr, change
-//    func triggerDeleteSubroutine(at indexPath: IndexPath) {
-//        deleteSubroutine(at: indexPath)
-//    }
     func updateCurrentSubroutine(with newSubIndex: Int) {
         currentSubroutine = newSubIndex
     }
@@ -156,29 +143,29 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         
         reloadRoutineDetailVC()
     }
-    func deleteSubroutine(at toEditSubroutineIndex: IndexPath) {
-        subroutines.remove(at: toEditSubroutineIndex.row)
+    func deleteSubroutine(at toEditSubroutineIndex: Int) {
+        subroutines.remove(at: toEditSubroutineIndex)
         saveRoutinesToStorage()
         
         // if currentIndex no longer in range
-        if (currentSubroutine >= subroutines.count || currentSubroutine == toEditSubroutineIndex.row) {
+        if (currentSubroutine >= subroutines.count || currentSubroutine == toEditSubroutineIndex) {
             currentSubroutine = 0
         }
         
         iconsCVC?.selectedIndex = currentSubroutine
         reloadRoutineDetailVC()
     }
-    func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: IndexPath) {
+    func editExistingSubroutine(iconPath: String?, desc: String?, at subroutineIndex: Int) {
         if iconPath == iconPath {
-            subroutines[subroutineIndex.row].iconPath = iconPath
+            subroutines[subroutineIndex].iconPath = iconPath
         } else {
-            subroutines[subroutineIndex.row].iconPath = nil
+            subroutines[subroutineIndex].iconPath = nil
         }
         
         if desc == desc {
-            subroutines[subroutineIndex.row].desc = desc
+            subroutines[subroutineIndex].desc = desc
         } else {
-            subroutines[subroutineIndex.row].desc = nil
+            subroutines[subroutineIndex].desc = nil
         }
         
         saveRoutinesToStorage()
@@ -200,11 +187,10 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         delegate?.syncWithList(with: self.routines)
     }
     
-    // ---------------------
-    // ICONS: Current icon + icons container view
-    // ---------------------
-    
 
+    // ------------------------------------------
+    // UI Functions
+    // ------------------------------------------
     
     // ---------------------
     //  Description (textview)
@@ -256,6 +242,26 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         return .none
     }
     
+    // ---------------------
+    // Subroutine header view
+    // ---------------------
+    func triggerNewSubroutine() {
+        performSegue(withIdentifier: "triggerAddSubroutine", sender: Any?.self)
+    }
+
+    func triggerEditSubroutine(at indexPath: Int) {
+        toEditSubroutineIndex = indexPath
+        performSegue(withIdentifier: "triggerEditSubroutine", sender: Any?.self)
+        toEditSubroutineIndex = nil
+    }
+    
+    @IBAction func editSubroutineButtonTapped(_ sender: UIButton) {
+        triggerEditSubroutine(at: currentSubroutine)
+    }
+    
+    @IBAction func addSubroutineButtonTapped(_ sender: UIButton) {
+        triggerNewSubroutine()
+    }
     
     // ---------------------
     // Add new action (textfield) (DATA)
@@ -421,7 +427,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
                 routineAddEditVC.newSubroutineState = false
                 
                 if let toEditSubroutineIndex = toEditSubroutineIndex {
-                    let subroutine = subroutines[toEditSubroutineIndex.row]
+                    let subroutine = subroutines[toEditSubroutineIndex]
                     routineAddEditVC.desc = subroutine.desc
                     routineAddEditVC.toEditIconPath = subroutine.iconPath
                     routineAddEditVC.toEditSubroutineIndex = toEditSubroutineIndex
