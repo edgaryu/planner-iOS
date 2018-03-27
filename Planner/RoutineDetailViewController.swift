@@ -45,8 +45,15 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     @IBOutlet weak var userView: UIView!
     
     // top half elements
+    
+    @IBOutlet weak var subroutineHeaderView: UIView!
+//    var addIconButton : UIButton!
+    @IBOutlet weak var editSubroutineButton: UIButton!
+    @IBOutlet weak var addSubroutineButton: UIButton!
+    @IBOutlet weak var subroutineHeaderLabel: UILabel!
     @IBOutlet weak var iconsContainerView: UIView!
-    var addIconButton : UIButton!
+    
+    @IBOutlet weak var descTextLabelView: UIView!
     @IBOutlet weak var descTextLabel: UILabel!
     
     // bottom half elements
@@ -349,9 +356,10 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         actionTextField.delegate = self
         
         // add icon button
-        addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
-        addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
+//        addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
+//        addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
         
+        // calls routineEdit
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(routineEditBarButtonTapped(_:)))
         
 
