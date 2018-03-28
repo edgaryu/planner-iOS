@@ -60,7 +60,7 @@ struct Subroutine : Codable {
     // initialize completely empty subroutine at this index
     // default icon is
     init(at index: Int) {
-        iconPath = "sun.png"
+        iconPath = "001-clouded.png"
         desc = nil
         actions = [Action]()
     }

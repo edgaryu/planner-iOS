@@ -69,7 +69,7 @@ extension RoutineDetailViewController {
         iconsContainerView.layer.borderColor = UIColor.red.cgColor
         iconsContainerView.layer.cornerRadius = 5
         iconsContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(iconSize)
+            make.height.equalTo(iconSize + 16)
             make.top.equalTo(subroutineHeaderView.snp.bottom).offset(0)
 //            make.top.equalTo(iconsContainerView.superview!)
             make.left.right.equalTo(iconsContainerView.superview!)

@@ -283,6 +283,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     }
     
     func handleAddAction() {
+        actionTextField.resignFirstResponder()
+        
         guard let newAction = actionTextField.text, !newAction.isEmpty else {
             print("Action text field empty")
             return
@@ -293,16 +295,14 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         
         actionTVC?.actions = self.subroutines[currentSubroutine].actions
         actionTVC?.tableView.reloadData()
-        actionTextField.resignFirstResponder()
+        
         actionTextField.text = ""
     }
     
     // ---------------------
     // Bottom nav bar
     // ---------------------
-    
-    
-    
+
     // Weather button
     @IBAction func weatherButtonTapped(_ sender: UIButton) {
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -333,7 +333,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
             editActionsButton.setImage(UIImage(named: "setting-on"), for: .normal)
             actionTVC?.tableView.isEditing = true
         } else {
-            editActionsButton.setImage(UIImage(named: "setting-off"), for: .normal)
+//            editActionsButton.setImage(UIImage(named: "setting-off"), for: .normal)
+            editActionsButton.setImage(UIImage(named: "setting-off1"), for: .normal)
             actionTVC?.tableView.isEditing = false
         }
         actionTVC?.editMode? = editActionsMode
@@ -366,7 +367,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //        addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
         
         // calls routineEdit
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(routineEditBarButtonTapped(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(routineEditBarButtonTapped(_:)))
         
 
         //

@@ -105,23 +105,30 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tempURLArray = Bundle.main.urls(forResourcesWithExtension: "png", subdirectory: "Icons")! as [URL]
+        
+        
         // init sample icons from Icons Directory
+        let tempURLArray = Bundle.main.urls(forResourcesWithExtension: "png", subdirectory: "Icons")! as [URL]
         iconsArray = tempURLArray.map { url -> String in
             let theFileName = (url.path as NSString).lastPathComponent
             return theFileName
         }
         
-        // If editing a subroutine
         if let newSubroutineState = newSubroutineState {
             
+            // editing subroutine
             if (!newSubroutineState) {
+                self.title = "Edit subroutine"
                 descTextField.text = desc
                 
                 if let toEditIconPath = toEditIconPath {
                     selectedIndex = iconsArray.index(of: toEditIconPath)
                     availableIconsCollectionView.reloadData()
                 }
+            }
+            // adding new subroutine
+            else {
+                self.title = "New subroutine"
             }
         }
         
@@ -153,8 +160,8 @@ class RoutineAddEditTableViewController: UITableViewController, UICollectionView
         
         // Change border of selected / deselected cells
         if cell.cellIndex == selectedIndex {
-            cell.iconButton?.layer.borderColor = UIColor.red.cgColor
-            cell.iconButton?.layer.borderWidth = 2
+            cell.iconButton?.layer.borderColor = UIColor.green.cgColor
+            cell.iconButton?.layer.borderWidth = 4
         } else {
 //            cell.layer.borderColor = UIColor.cgColor
             cell.iconButton?.layer.borderWidth = 0
