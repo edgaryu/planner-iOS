@@ -38,7 +38,7 @@ class RoutineListTableViewController: UITableViewController, SyncDetailWithListD
                 print("Add new routine error")
                 return
             }
-            let newRoutine = Routine(routineTitle: newRoutineTitle, subroutines: [Subroutine]())
+            let newRoutine = Routine(named: newRoutineTitle)
             self.routines.append(newRoutine)
             
             DispatchQueue.main.async {
@@ -211,7 +211,7 @@ class RoutineListTableViewController: UITableViewController, SyncDetailWithListD
             let indexPath = tableView.indexPathForSelectedRow!
             let selectedRoutine = routines[indexPath.row]
             routineDetailController.routineTitle = selectedRoutine.routineTitle
-            routineDetailController.routines = self.routines
+//            routineDetailController.routines = self.routines
             routineDetailController.subroutines = selectedRoutine.subroutines
             routineDetailController.currentRoutine = indexPath.row
             routineDetailController.delegate = self

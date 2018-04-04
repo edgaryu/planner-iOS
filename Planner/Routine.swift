@@ -14,6 +14,8 @@ let dataFilePath = "planner_v2"
 struct Routine : Codable {
     var routineTitle: String
     var subroutines : [Subroutine]
+    var recentWeather: WeatherData?
+    var weatherOptions: WeatherOptions
     
     // storage URL of app data
     static var archiveURL : URL {
@@ -48,6 +50,13 @@ struct Routine : Codable {
     
     static func emptyRoutines() -> [Routine] {
         return [Routine]()
+    }
+    
+    // create new Routine in RoutineList
+    init(named routineTitle: String) {
+        self.routineTitle = routineTitle
+        subroutines = [Subroutine]()
+        weatherOptions = WeatherOptions()
     }
     
 }

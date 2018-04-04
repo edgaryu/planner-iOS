@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 # Uncomment the next line to define a global platform for your project
 platform :ios, ’10.0’
 
@@ -7,6 +9,8 @@ target 'Planner' do
 
   # Pods for Planner
   pod 'SnapKit', '~> 4.0.0'
+  pod 'GooglePlaces'
+
 
   target 'PlannerTests' do
     inherit! :search_paths

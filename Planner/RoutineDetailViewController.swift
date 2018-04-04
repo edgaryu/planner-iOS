@@ -24,7 +24,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     var iconsCVC: IconsCollectionViewController?
     
     // From List to DetailVC
-    var routines = [Routine]()
+//    var routines = [Routine]()
     var subroutines = [Subroutine]()
     var routineTitle: String?
     var currentRoutine = 0 // used only when saving to storage
@@ -181,10 +181,11 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     // save routines to file
     private func saveRoutinesToStorage() {
-        self.routines[currentRoutine].subroutines = self.subroutines
-        self.routines[currentRoutine].routineTitle = self.routineTitle ?? ""
-        Routine.saveToFile(routines: self.routines)
-        delegate?.syncWithList(with: self.routines)
+        var routines = Routine.loadFromFile()
+        routines[currentRoutine].subroutines = self.subroutines
+        routines[currentRoutine].routineTitle = self.routineTitle ?? ""
+        Routine.saveToFile(routines: routines)
+        delegate?.syncWithList(with: routines)
     }
     
 
@@ -304,25 +305,25 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // ---------------------
 
     // Weather button
-    @IBAction func weatherButtonTapped(_ sender: UIButton) {
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
-        popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
-        
-        
-        if let popover: UIPopoverPresentationController =
-            popoverController.popoverPresentationController {
-            let sourceView = sender as UIView
-            popover.delegate = self
-            popoverController.preferredContentSize = CGSize(width: 100, height: 30)
-//            popover.backgroundColor = popoverController.view.backgroundColor
-            popover.sourceView = sourceView
-            popover.sourceRect = sourceView.bounds
-        }
-        
-        present(popoverController, animated: true, completion: nil)
-
-    }
+//    @IBAction func weatherButtonTapped(_ sender: UIButton) {
+//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let popoverController = storyboard.instantiateViewController(withIdentifier: "iconPopover")
+//        popoverController.modalPresentationStyle = UIModalPresentationStyle.popover
+//
+//
+//        if let popover: UIPopoverPresentationController =
+//            popoverController.popoverPresentationController {
+//            let sourceView = sender as UIView
+//            popover.delegate = self
+//            popoverController.preferredContentSize = CGSize(width: 100, height: 30)
+////            popover.backgroundColor = popoverController.view.backgroundColor
+//            popover.sourceView = sourceView
+//            popover.sourceRect = sourceView.bounds
+//        }
+//
+//        present(popoverController, animated: true, completion: nil)
+//
+//    }
     
     
     @IBAction func editActionsButtonTapped(_ sender: UIButton) {
@@ -330,11 +331,10 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         editActionsMode = !editActionsMode
         
         if (editActionsMode) {
-            editActionsButton.setImage(UIImage(named: "setting-on"), for: .normal)
+            editActionsButton.setImage(UIImage(named: "edit-action-done"), for: .normal)
             actionTVC?.tableView.isEditing = true
         } else {
-//            editActionsButton.setImage(UIImage(named: "setting-off"), for: .normal)
-            editActionsButton.setImage(UIImage(named: "setting-off1"), for: .normal)
+            editActionsButton.setImage(UIImage(named: "edit-action"), for: .normal)
             actionTVC?.tableView.isEditing = false
         }
         actionTVC?.editMode? = editActionsMode
@@ -433,6 +433,12 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
                     routineAddEditVC.toEditIconPath = subroutine.iconPath
                     routineAddEditVC.toEditSubroutineIndex = toEditSubroutineIndex
                 }
+            }
+        }
+        
+        if segue.identifier == "routineWeather" {
+            if let routineWeatherVC = segue.destination as? RoutineWeatherViewController {
+                routineWeatherVC.currentRoutine = currentRoutine
             }
         }
     }
