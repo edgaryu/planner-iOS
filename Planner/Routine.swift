@@ -14,7 +14,7 @@ let dataFilePath = "planner_v2"
 struct Routine : Codable {
     var routineTitle: String
     var subroutines : [Subroutine]
-    var recentWeather: WeatherData?
+    var recentWeatherResponse: WeatherResponse?
     var weatherOptions: WeatherOptions
     
     // storage URL of app data
@@ -43,7 +43,7 @@ struct Routine : Codable {
             let retrieveData = try Data(contentsOf: archiveURL)
             return try propertyListDecoder.decode(Array<Routine>.self, from: retrieveData)
         } catch {
-//            print(error)
+            print(error)
             return [Routine]()
         }
     }

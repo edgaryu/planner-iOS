@@ -12,8 +12,11 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var statusButton: UIButton!
+    @IBOutlet weak var tempHighLabel: UILabel!
+    @IBOutlet weak var tempLowLabel: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var weatherIcon: UIImageView!
     
+    @IBOutlet weak var cellForegroundView: UIView!
     @IBOutlet weak var cellBackgroundView: UIView!
 }

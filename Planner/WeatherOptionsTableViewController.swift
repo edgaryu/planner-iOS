@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 
 protocol WeatherOptionsDelegate : class {
-    func weatherOptionsUpdated()
+    func weatherOptionsUpdated(with newOptions: WeatherOptions)
 }
 
 class WeatherOptionsTableViewController: UITableViewController, LocationSearchDelegate {
@@ -42,19 +42,35 @@ class WeatherOptionsTableViewController: UITableViewController, LocationSearchDe
     
     // delegate methods
     func locationFound(location: String, coordinates: CLLocationCoordinate2D) {
-        locationLabel.text = location
-        weatherOptions.locationName = location
+//        locationLabel.text = location
+//        weatherOptions.locationName = location
         weatherOptions.latitude = coordinates.latitude
         weatherOptions.longitude = coordinates.longitude
         
-        // save
-        saveWeatherOptionsToStorage()
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+
+            if let locationName = placeMark.locality  {
+                self.weatherOptions.locationName = "\(locationName)"
+                self.locationLabel.text = locationName
+            } else{
+                self.weatherOptions.locationName = nil
+            }
+            
+            // save
+            self.saveWeatherOptionsToStorage()
+        })
+        
         
     }
     
     // private methods
     private func saveWeatherOptionsToStorage() {
-        delegate?.weatherOptionsUpdated()
+        delegate?.weatherOptionsUpdated(with: self.weatherOptions)
         
         var routines = Routine.loadFromFile()
         routines[currentRoutine].weatherOptions = self.weatherOptions
@@ -127,10 +143,10 @@ class WeatherOptionsTableViewController: UITableViewController, LocationSearchDe
         self.weatherOptions = existingWeatherOptions
         locationLabel.text = weatherOptions.locationName ?? "Select a location"
         
-        waitBetweenSwitch.isOn = weatherOptions.daysBetweenBool ?? false
-        minDaysSwitch.isOn = weatherOptions.minDaysPerWeekBool ?? false
-        avoidRainSwitch.isOn = weatherOptions.noRaining ?? false
-        tempRangeSwitch.isOn = weatherOptions.tempRangeBool ?? false
+        waitBetweenSwitch.isOn = weatherOptions.daysBetweenBool
+        minDaysSwitch.isOn = weatherOptions.minDaysPerWeekBool
+        avoidRainSwitch.isOn = weatherOptions.noRaining
+        tempRangeSwitch.isOn = weatherOptions.tempRangeBool
         
         if let daysBetween = weatherOptions.daysBetween {
             waitBetweenTextField.text = String(daysBetween)
