@@ -10,7 +10,7 @@ import XCTest
 @testable import Planner
 
 class PlannerTests: XCTestCase {
-    var listvc : RoutineListTableViewController!
+    var listvc : RoutineListViewController!
     var dummyRoutines: [Routine]?
     
     override func setUp() {
@@ -18,7 +18,7 @@ class PlannerTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navvc = storyboard.instantiateViewController(withIdentifier: "nav1") as! UINavigationController
-        listvc = navvc.viewControllers[0] as! RoutineListTableViewController
+        listvc = navvc.viewControllers[0] as! RoutineListViewController
         let _ = listvc.view
         
     }

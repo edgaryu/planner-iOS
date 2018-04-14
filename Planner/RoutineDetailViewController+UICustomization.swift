@@ -17,7 +17,7 @@ extension RoutineDetailViewController {
         // ---------------------
         
         self.view.addSubview(bottomBackgroundView)
-        bottomBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
+//        bottomBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
         bottomBackgroundView.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(0)
@@ -26,13 +26,14 @@ extension RoutineDetailViewController {
         }
         
         self.view.addSubview(userView)
-        userView.layer.borderWidth = 0.5
-        userView.layer.borderColor = UIColor.lightGray.cgColor
+        userView.layer.backgroundColor = UIColor.lightGray.cgColor
+//        userView.layer.borderWidth = 0.5
+//        userView.layer.borderColor = UIColor.lightGray.cgColor
         userView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(15)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(24)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-24)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(15)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-15)
         }
         
         userView.addSubview(subroutineHeaderView)
@@ -60,14 +61,16 @@ extension RoutineDetailViewController {
 
         subroutineHeaderView.addSubview(subroutineHeaderLabel)
         subroutineHeaderLabel.snp.makeConstraints { (make) in
-            make.top.left.bottom.equalTo(subroutineHeaderView)
+            make.top.bottom.equalTo(subroutineHeaderView)
+            make.left.equalTo(subroutineHeaderView).offset(10)
 //            make.right.equalTo(editSubroutineButton.snp.left)
         }
         
         userView.addSubview(iconsContainerView)
-        iconsContainerView.layer.borderWidth = 2
-        iconsContainerView.layer.borderColor = UIColor.red.cgColor
-        iconsContainerView.layer.cornerRadius = 5
+//        iconsContainerView.layer.backgroundColor = UIColor(white: 1, alpha: 0.0).cgColor
+//        iconsContainerView.layer.borderWidth = 1
+//        iconsContainerView.layer.borderColor = UIColor.red.cgColor
+//        iconsContainerView.layer.cornerRadius = 5
         iconsContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(iconSize + 16)
             make.top.equalTo(subroutineHeaderView.snp.bottom).offset(0)

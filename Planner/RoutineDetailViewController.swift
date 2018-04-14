@@ -87,7 +87,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         popToRoutineListTVC()
     }
     private func popToRoutineListTVC() {
-        if let routineListTVC = navigationController?.viewControllers[0] as? RoutineListTableViewController {
+        if let routineListTVC = navigationController?.viewControllers[0] as? RoutineListViewController {
             navigationController?.popToViewController(routineListTVC, animated: true)
         }
     }
@@ -219,7 +219,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // Edit routine popover
     // ---------------------
     
-    @objc func routineEditBarButtonTapped(_ sender: Any) {
+    @IBAction func routineEditBarButtonTapped(_ sender: Any) {
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "routineEditVC")
             as! RoutineEditPopoverViewController
@@ -234,9 +234,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         ppc?.permittedArrowDirections = .any
         ppc?.delegate = self
         ppc?.barButtonItem = navigationItem.rightBarButtonItem
-
-        present(vc, animated: true, completion: nil)
         
+        present(vc, animated: true, completion: nil)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -341,6 +340,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         actionTVC?.tableView.reloadData()
 
     }
+
     
     // ---------------------
     // viewDidLoad()
@@ -367,8 +367,8 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //        addIconButton.addTarget(self, action: #selector(triggerNewSubroutine), for: UIControlEvents.touchUpInside)
         
         // calls routineEdit
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(routineEditBarButtonTapped(_:)))
-        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(routineEditBarButtonTapped(_:)))
+        self.navigationItem.hidesBackButton = true
 
         //
         // need different update UI for if 1+ subroutine, no subroutine
