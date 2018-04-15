@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,7 +35,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8q-lZ-xU5">
                                                 <rect key="frame" x="213" y="0.0" width="46" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Edit"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title="Edit">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="editSubroutineButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="TiJ-SP-2wv"/>
                                                 </connections>
@@ -44,8 +46,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f37-3m-MoO">
                                                 <rect key="frame" x="274" y="0.0" width="46" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="Add"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title="Add">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="addSubroutineButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="Iku-JK-nsa"/>
                                                 </connections>
@@ -53,12 +57,12 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subroutines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFU-JY-p3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-29-zzS">
                                         <rect key="frame" x="0.0" y="22" width="320" height="66"/>
@@ -85,60 +89,91 @@
                                         <rect key="frame" x="0.0" y="118.5" width="320" height="385.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ju-EU-xo1">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dWN-LF-uR0">
+                                                        <rect key="frame" x="20" y="0.0" width="158.5" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Add a new routine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CxQ-zS-kUd">
+                                                                <rect key="frame" x="0.0" y="1" width="130.5" height="18"/>
+                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                                <connections>
+                                                                    <action selector="beginAddingNewAction:" destination="uBl-UE-UFc" eventType="editingDidBegin" id="55w-JT-eSy"/>
+                                                                    <action selector="endAddingNewAction:" destination="uBl-UE-UFc" eventType="editingDidEnd" id="hTt-HC-uka"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeJ-gL-YN1">
+                                                                <rect key="frame" x="138.5" y="0.0" width="20" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="20" id="n9E-E4-Dyc"/>
+                                                                    <constraint firstAttribute="width" constant="20" id="sDH-Ke-hRm"/>
+                                                                </constraints>
+                                                                <state key="normal" image="menu-add"/>
+                                                                <connections>
+                                                                    <action selector="actionAccButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="v6O-Rj-iiX"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbq-ra-CPi">
-                                                <rect key="frame" x="0.0" y="45" width="320" height="276.5"/>
+                                                <rect key="frame" x="0.0" y="40" width="320" height="281"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
-                                                    <segue destination="0A7-tN-r8t" kind="embed" identifier="RoutineActionListSegue" id="buI-kc-Tty"/>
+                                                    <segue destination="Bep-LD-Jyx" kind="embed" id="D18-vX-ay9"/>
                                                 </connections>
                                             </containerView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-2h-WYX">
-                                                <rect key="frame" x="271" y="337" width="32" height="32"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wuL-lb-HsC">
+                                                <rect key="frame" x="250" y="325" width="58" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="edit-action"/>
-                                                <connections>
-                                                    <action selector="editActionsButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="QrL-ph-xnB"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-Vi-Vvn">
-                                                <rect key="frame" x="10" y="337" width="52" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="nav-weather-1"/>
-                                                <connections>
-                                                    <segue destination="mgQ-cW-XLN" kind="presentation" identifier="routineWeather" id="oMa-aj-4cq"/>
-                                                </connections>
-                                            </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9x0-5f-J1F">
-                                                <rect key="frame" x="0.0" y="0.0" width="62" height="29"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kaW-jR-4Rk">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="29"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRL-ig-NIz">
-                                                        <rect key="frame" x="33" y="0.0" width="29" height="29"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="FRL-ig-NIz" secondAttribute="height" multiplier="29:29" id="9ri-ZQ-4PT"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" image="menu-add"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-2h-WYX">
+                                                        <rect key="frame" x="13" y="0.0" width="32" height="32"/>
+                                                        <state key="normal" image="edit-action"/>
                                                         <connections>
-                                                            <action selector="addActionButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="huE-Ey-94c"/>
+                                                            <action selector="editActionsButtonTapped:" destination="uBl-UE-UFc" eventType="touchUpInside" id="QrL-ph-xnB"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Edit Actions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4Z-Cd-15Y">
+                                                        <rect key="frame" x="0.0" y="32" width="58" height="12"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="29" id="kUo-O3-i6h"/>
-                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="34Y-jG-Z6C">
+                                                <rect key="frame" x="10" y="337" width="41" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-Vi-Vvn">
+                                                        <rect key="frame" x="4.5" y="0.0" width="32" height="32"/>
+                                                        <state key="normal" image="nav-weather-1"/>
+                                                        <connections>
+                                                            <segue destination="mgQ-cW-XLN" kind="presentation" identifier="routineWeather" id="oMa-aj-4cq"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hw6-CS-AaC">
+                                                        <rect key="frame" x="0.0" y="32" width="41" height="12"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,34 +182,38 @@
                     <navigationItem key="navigationItem" id="frI-6W-u24">
                         <barButtonItem key="backBarButtonItem" title=" " id="elQ-ka-S0l"/>
                         <barButtonItem key="leftBarButtonItem" image="menu-back" width="20" id="s5x-uJ-a63">
-                            <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="avy-hr-50d" kind="unwind" unwindAction="unwindToListWithSegue:" id="Rv7-Fv-SL4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="f8X-Nl-BeL">
-                            <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="routineEditBarButtonTapped:" destination="uBl-UE-UFc" id="vN0-l8-ZUl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="actionTextField" destination="kaW-jR-4Rk" id="LUe-7j-XVd"/>
+                        <outlet property="actionAccButton" destination="CeJ-gL-YN1" id="Xj0-Wz-QAC"/>
+                        <outlet property="actionTextField" destination="CxQ-zS-kUd" id="yi9-t7-d9L"/>
                         <outlet property="actionsContainerView" destination="pbq-ra-CPi" id="krN-3w-PDT"/>
                         <outlet property="actionsView" destination="sMH-VM-zJ5" id="mfi-u9-bhx"/>
-                        <outlet property="addActionStackView" destination="9x0-5f-J1F" id="Lae-jl-14y"/>
+                        <outlet property="addActionStackView" destination="dWN-LF-uR0" id="Hkd-5e-dwZ"/>
+                        <outlet property="addActionView" destination="1ju-EU-xo1" id="bri-yl-4E3"/>
                         <outlet property="addSubroutineButton" destination="f37-3m-MoO" id="pcy-Qs-UNa"/>
                         <outlet property="bottomBackgroundView" destination="iAv-Dr-uo3" id="hY0-WO-Dno"/>
                         <outlet property="descTextLabel" destination="NPu-BN-YhQ" id="kbM-eA-Rhg"/>
                         <outlet property="descTextLabelView" destination="u52-16-r5G" id="nky-FV-N1W"/>
                         <outlet property="editActionsButton" destination="bPU-2h-WYX" id="eUH-no-e2H"/>
+                        <outlet property="editStackView" destination="wuL-lb-HsC" id="f8t-X2-OaI"/>
                         <outlet property="editSubroutineButton" destination="c8q-lZ-xU5" id="uKc-ta-Gqv"/>
                         <outlet property="iconsContainerView" destination="KRP-29-zzS" id="Cjj-PZ-DzJ"/>
                         <outlet property="subroutineHeaderLabel" destination="LFU-JY-p3k" id="CLR-9I-KU8"/>
                         <outlet property="subroutineHeaderView" destination="uyQ-bl-8Yh" id="g29-Q1-ecN"/>
                         <outlet property="userView" destination="q7o-Lt-kxF" id="WR0-FX-6Zl"/>
                         <outlet property="weatherButton" destination="B4e-Vi-Vvn" id="rzf-CM-YTy"/>
+                        <outlet property="weatherStackVIew" destination="34Y-jG-Z6C" id="cg8-OF-jVD"/>
                         <segue destination="avy-hr-50d" kind="unwind" identifier="deleteRoutine" unwindAction="unwindToListWithSegue:" id="wZj-Bf-tP2"/>
                         <segue destination="qsp-1w-wal" kind="show" identifier="triggerAddSubroutine" id="lKc-KY-K1r"/>
                         <segue destination="qsp-1w-wal" kind="show" identifier="triggerEditSubroutine" id="Hra-WU-9Q8"/>
@@ -183,7 +222,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXb-FA-s0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="avy-hr-50d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="227" y="904"/>
+            <point key="canvasLocation" x="226.875" y="903.16901408450701"/>
         </scene>
         <!--Routine List View Controller-->
         <scene sceneID="oE1-dE-8kX">
@@ -207,6 +246,10 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                        <connections>
+                                                            <action selector="beginAddingNewRoutine:" destination="KMq-Ib-MMi" eventType="editingDidBegin" id="dzS-P4-UAR"/>
+                                                            <action selector="endAddingNewRoutine:" destination="KMq-Ib-MMi" eventType="editingDidEnd" id="EXU-oJ-SbI"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46V-OX-vvq">
                                                         <rect key="frame" x="230" y="10" width="20" height="20"/>
@@ -215,6 +258,9 @@
                                                             <constraint firstAttribute="width" constant="20" id="xfQ-IX-XKF"/>
                                                         </constraints>
                                                         <state key="normal" image="menu-add"/>
+                                                        <connections>
+                                                            <action selector="routineAccButtonTapped:" destination="KMq-Ib-MMi" eventType="touchUpInside" id="Lcf-sq-R8v"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -306,10 +352,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Routines" id="KWM-SM-j4o">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu-bar" width="20" id="Kzs-xp-fvQ">
-                            <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="newRoutineAccButton" destination="46V-OX-vvq" id="S2Z-Kq-Qg1"/>
                         <outlet property="newRoutineTextField" destination="68H-bq-g5u" id="x82-1l-GsL"/>
                         <outlet property="routinesCollectionView" destination="iam-lu-27O" id="Lz0-Y2-Fzz"/>
                     </connections>
@@ -325,7 +372,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yEy-gM-Ttg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="qw3-nJ-bg5">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -351,6 +398,96 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8l-YU-EpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1166" y="601"/>
+        </scene>
+        <!--Routine Action Collection View Controller-->
+        <scene sceneID="rAP-8j-C8P">
+            <objects>
+                <collectionViewController id="Bep-LD-Jyx" customClass="RoutineActionCollectionViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="NRO-0Z-oAn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="281"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="OBM-hf-ETZ">
+                            <size key="itemSize" width="290" height="30"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="actionCell" id="USW-Ou-38B" customClass="ActionCollectionViewCell" customModule="Planner" customModuleProvider="target">
+                                <rect key="frame" x="15" y="0.0" width="290" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wry-du-VYO">
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njc-Mo-dpe">
+                                                    <rect key="frame" x="220" y="6" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="F8v-z1-FVQ">
+                                                    <rect key="frame" x="47" y="3" width="32" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2u-yA-8As">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <state key="normal" image="menu-x">
+                                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="deleteActionButtonTapped:" destination="USW-Ou-38B" eventType="touchUpInside" id="ZVI-D8-gun"/>
+                                                            </connections>
+                                                        </button>
+                                                        <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OxY-Em-fxx">
+                                                            <rect key="frame" x="24" y="3" width="8" height="18"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="actionLabelTextFieldEditing:" destination="USW-Ou-38B" eventType="editingDidEnd" id="Iln-lU-Jnu"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="iT4-sR-PGl"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="wry-du-VYO" secondAttribute="bottom" id="SUW-c1-g6j"/>
+                                    <constraint firstItem="wry-du-VYO" firstAttribute="top" secondItem="USW-Ou-38B" secondAttribute="top" id="cSO-ca-RlK"/>
+                                    <constraint firstItem="wry-du-VYO" firstAttribute="leading" secondItem="USW-Ou-38B" secondAttribute="leading" id="ezB-7G-6m2"/>
+                                    <constraint firstAttribute="trailing" secondItem="wry-du-VYO" secondAttribute="trailing" id="xJu-i9-daq"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="actionCellView" destination="wry-du-VYO" id="e3E-yX-Bku"/>
+                                    <outlet property="actionLabel" destination="Njc-Mo-dpe" id="u8B-oi-Jj0"/>
+                                    <outlet property="actionLabelTextField" destination="OxY-Em-fxx" id="9fe-Zi-5B9"/>
+                                    <outlet property="deleteActionButton" destination="A2u-yA-8As" id="Tdi-0h-Stv"/>
+                                    <outlet property="editingStackView" destination="F8v-z1-FVQ" id="rOd-Az-lgj"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Bep-LD-Jyx" id="3bt-Ws-Tap"/>
+                            <outlet property="delegate" destination="Bep-LD-Jyx" id="jBM-XO-rhQ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Fh-qm-tHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1085.625" y="959.68309859154931"/>
         </scene>
         <!--Routine Edit Popover View Controller-->
         <scene sceneID="z1f-Tt-sNV">
@@ -447,65 +584,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFs-Uc-Y8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1811.25" y="874.64788732394368"/>
-        </scene>
-        <!--Routine Action Table View Controller-->
-        <scene sceneID="05j-HM-ytU">
-            <objects>
-                <tableViewController id="0A7-tN-r8t" customClass="RoutineActionTableViewController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TDG-aD-ewN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="276.5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="actionCell" id="5y9-sG-fz5" customClass="ActionTableViewCell" customModule="Planner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5y9-sG-fz5" id="IMi-Po-mpE">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pd-jm-Aep">
-                                            <rect key="frame" x="8" y="8" width="304" height="27.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1YV-Mp-tYA">
-                                            <rect key="frame" x="8" y="8" width="304" height="28"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <action selector="actionLabelTextFieldEditing:" destination="5y9-sG-fz5" eventType="editingChanged" id="4IO-t7-ziA"/>
-                                            </connections>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="1YV-Mp-tYA" secondAttribute="trailing" constant="8" id="1F4-Xx-qIk"/>
-                                        <constraint firstAttribute="bottom" secondItem="2pd-jm-Aep" secondAttribute="bottom" constant="8" id="KC0-wN-1Ga"/>
-                                        <constraint firstItem="2pd-jm-Aep" firstAttribute="top" secondItem="IMi-Po-mpE" secondAttribute="top" constant="8" id="NkL-rB-fhR"/>
-                                        <constraint firstItem="2pd-jm-Aep" firstAttribute="leading" secondItem="IMi-Po-mpE" secondAttribute="leading" constant="8" id="jZC-jF-vwD"/>
-                                        <constraint firstAttribute="trailing" secondItem="2pd-jm-Aep" secondAttribute="trailing" constant="8" id="kHt-d3-UfV"/>
-                                        <constraint firstAttribute="bottom" secondItem="1YV-Mp-tYA" secondAttribute="bottom" constant="8" id="nzn-ay-uJC"/>
-                                        <constraint firstItem="1YV-Mp-tYA" firstAttribute="leading" secondItem="IMi-Po-mpE" secondAttribute="leading" constant="8" id="pVF-BB-6xq"/>
-                                        <constraint firstItem="1YV-Mp-tYA" firstAttribute="top" secondItem="IMi-Po-mpE" secondAttribute="top" constant="8" id="rDA-Tt-y8x"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="actionLabel" destination="2pd-jm-Aep" id="yQ5-cT-23Y"/>
-                                    <outlet property="actionLabelTextField" destination="1YV-Mp-tYA" id="4xV-Im-ueN"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="0A7-tN-r8t" id="Zpb-2s-g9K"/>
-                            <outlet property="delegate" destination="0A7-tN-r8t" id="p8Y-WJ-IKh"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qxS-OF-QMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1164" y="1028"/>
         </scene>
         <!--Routine Add Edit Table View Controller-->
         <scene sceneID="bt5-8y-gXM">
@@ -1241,6 +1319,7 @@
         <image name="menu-add" width="24" height="24"/>
         <image name="menu-back" width="24" height="24"/>
         <image name="menu-bar" width="24" height="24"/>
+        <image name="menu-x" width="24" height="24"/>
         <image name="nav-weather-1" width="32" height="32"/>
         <image name="setting" width="32" height="32"/>
         <image name="update-non" width="32" height="32"/>

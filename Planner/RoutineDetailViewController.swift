@@ -20,7 +20,7 @@ protocol SyncDetailWithListDelegate: class {
 
 class RoutineDetailViewController: UIViewController, UITextFieldDelegate, RoutineActionDelegate, IconsContainerDelegate, addEditCompletedDelegate, UIPopoverPresentationControllerDelegate, RoutineEditPopoverDelegate {
     
-    var actionTVC: RoutineActionTableViewController?
+    var actionTVC: RoutineActionCollectionViewController?
     var iconsCVC: IconsCollectionViewController?
     
     // From List to DetailVC
@@ -58,8 +58,15 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     // bottom half elements
     @IBOutlet weak var actionsView: UIView!
+    @IBOutlet weak var addActionView: UIView!
     @IBOutlet weak var addActionStackView: UIStackView!
+    @IBOutlet weak var actionTextField: UITextField!
+    @IBOutlet weak var actionAccButton: UIButton!
     @IBOutlet weak var actionsContainerView: UIView!
+    
+    
+    @IBOutlet weak var editStackView: UIStackView!
+    @IBOutlet weak var weatherStackVIew: UIStackView!
     @IBOutlet weak var weatherButton: UIButton!
     @IBOutlet weak var editActionsButton: UIButton!
     
@@ -107,14 +114,14 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //            loadEmptyRoutineDetailVC()
             descTextLabel.text = ""
             actionTVC?.actions = [Action]()
-            actionTVC?.tableView.reloadData()
+            actionTVC?.collectionView?.reloadData()
             return
         }
         
         let newSubroutine = subroutines[currentSubroutine]
         descTextLabel.text = newSubroutine.desc ?? ""
         actionTVC?.actions = newSubroutine.actions
-        actionTVC?.tableView.reloadData()
+        actionTVC?.collectionView?.reloadData()
     }
     
     // addEditCompletedDelgate functions
@@ -267,11 +274,33 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     // Add new action (textfield) (DATA)
     // ---------------------
     
-    @IBOutlet weak var actionTextField: UITextField!
-    @IBAction func addActionButtonTapped(_ sender: UIButton) {
-        animateButton(sender)
-        handleAddAction()
+    @objc func hideNewActionKeyboard() {
+        actionTextField.resignFirstResponder()
     }
+    
+    func resignActionTextField() {
+        actionAccButton.setImage(UIImage(named: "menu-add")!, for: .normal)
+        actionTextField.resignFirstResponder()
+        actionAccButton.removeTarget(nil, action: nil, for: .allEvents)
+    }
+    
+    @IBAction func beginAddingNewAction(_ sender: UITextField) {
+        actionAccButton.setImage(UIImage(named: "menu-bar")!, for: .normal)
+        actionAccButton.addTarget(self, action: #selector(hideNewActionKeyboard), for: .touchUpInside)
+    }
+    @IBAction func endAddingNewAction(_ sender: UITextField) {
+        resignActionTextField()
+    }
+    
+    @IBAction func actionAccButtonTapped(_ sender: UIButton) {
+        resignActionTextField()
+    }
+    
+    
+//    @IBAction func addActionButtonTapped(_ sender: UIButton) {
+//        animateButton(sender)
+//        handleAddAction()
+//    }
     
     // press enter on text field -> add action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -294,7 +323,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
         saveRoutinesToStorage()
         
         actionTVC?.actions = self.subroutines[currentSubroutine].actions
-        actionTVC?.tableView.reloadData()
+        actionTVC?.collectionView?.reloadData()
         
         actionTextField.text = ""
     }
@@ -325,19 +354,21 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
 //    }
     
     
+    
+    
+    
+
     @IBAction func editActionsButtonTapped(_ sender: UIButton) {
         animateButton(sender)
         editActionsMode = !editActionsMode
         
         if (editActionsMode) {
             editActionsButton.setImage(UIImage(named: "edit-action-done"), for: .normal)
-            actionTVC?.tableView.isEditing = true
         } else {
             editActionsButton.setImage(UIImage(named: "edit-action"), for: .normal)
-            actionTVC?.tableView.isEditing = false
         }
-        actionTVC?.editMode? = editActionsMode
-        actionTVC?.tableView.reloadData()
+        actionTVC?.editMode = editActionsMode
+        actionTVC?.collectionView?.reloadData()
 
     }
 
@@ -399,7 +430,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // RoutineDetailVC in-house segues
-        if let routineActionTVCDest = segue.destination as? RoutineActionTableViewController {
+        if let routineActionTVCDest = segue.destination as? RoutineActionCollectionViewController {
             actionTVC = routineActionTVCDest
             if (subroutines.count != 0) {
                 actionTVC?.actions = self.subroutines[currentSubroutine].actions

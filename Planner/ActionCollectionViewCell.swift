@@ -9,19 +9,28 @@
 import UIKit
 
 protocol ActionCellDelegate: class {
-    func actionNameEdited(sender: ActionTableViewCell, newTitle: String)
+    func actionNameEdited(sender: ActionCollectionViewCell, newTitle: String)
+    func deleteAction(sender: ActionCollectionViewCell)
 }
 
-class ActionTableViewCell: UITableViewCell, UITextFieldDelegate {
+class ActionCollectionViewCell: UICollectionViewCell, UITextFieldDelegate {
     var delegate: ActionCellDelegate?
     
     var editMode : Bool?
     
+    @IBOutlet weak var actionCellView: UIView!
     @IBOutlet weak var actionLabel: UILabel!
     @IBOutlet weak var actionLabelTextField: UITextField!
     
+    @IBOutlet weak var deleteActionButton: UIButton!
+    @IBOutlet weak var editingStackView: UIStackView!
+    
+    @IBAction func deleteActionButtonTapped(_ sender: UIButton) {
+        delegate?.deleteAction(sender: self)
+    }
     
     @IBAction func actionLabelTextFieldEditing(_ sender: UITextField) {
+        actionLabel.text = sender.text
         delegate?.actionNameEdited(sender: self, newTitle: actionLabelTextField.text!)
     }
     
@@ -29,7 +38,6 @@ class ActionTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == actionLabelTextField {
             actionLabelTextField.resignFirstResponder()
-            return false
         }
         return true
     }
@@ -40,10 +48,10 @@ class ActionTableViewCell: UITableViewCell, UITextFieldDelegate {
         actionLabelTextField.delegate = self
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
 }

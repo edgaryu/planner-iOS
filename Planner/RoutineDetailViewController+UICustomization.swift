@@ -13,6 +13,12 @@ extension RoutineDetailViewController {
     func updateUI() {
         
         // ---------------------
+        // Constants
+        // ---------------------
+        
+        let headerHeight : Int = 30
+        
+        // ---------------------
         // Constraint layouts
         // ---------------------
         
@@ -26,7 +32,7 @@ extension RoutineDetailViewController {
         }
         
         self.view.addSubview(userView)
-        userView.layer.backgroundColor = UIColor.lightGray.cgColor
+//        userView.layer.backgroundColor = UIColor.lightGray.cgColor
 //        userView.layer.borderWidth = 0.5
 //        userView.layer.borderColor = UIColor.lightGray.cgColor
         userView.snp.makeConstraints { (make) in
@@ -40,21 +46,21 @@ extension RoutineDetailViewController {
         subroutineHeaderView.layer.borderWidth = 1
         subroutineHeaderView.layer.borderColor = UIColor.lightGray.cgColor
         subroutineHeaderView.snp.makeConstraints { (make) in
-            make.height.equalTo(25)
+            make.height.equalTo(headerHeight)
             make.top.left.right.equalTo(userView)
         }
 
         subroutineHeaderView.addSubview(addSubroutineButton)
         addSubroutineButton.snp.makeConstraints { (make) in
             make.width.equalTo(45)
-            make.height.equalTo(25)
+            make.height.equalTo(headerHeight)
             make.top.right.bottom.equalTo(subroutineHeaderView)
         }
 
         subroutineHeaderView.addSubview(editSubroutineButton)
         editSubroutineButton.snp.makeConstraints { (make) in
             make.width.equalTo(45)
-            make.height.equalTo(25)
+            make.height.equalTo(headerHeight)
             make.top.bottom.equalTo(subroutineHeaderView)
             make.right.equalTo(addSubroutineButton.snp.left)
         }
@@ -67,9 +73,8 @@ extension RoutineDetailViewController {
         }
         
         userView.addSubview(iconsContainerView)
-//        iconsContainerView.layer.backgroundColor = UIColor(white: 1, alpha: 0.0).cgColor
-//        iconsContainerView.layer.borderWidth = 1
-//        iconsContainerView.layer.borderColor = UIColor.red.cgColor
+        iconsContainerView.layer.borderWidth = 0.5
+        iconsContainerView.layer.borderColor = UIColor.lightGray.cgColor
 //        iconsContainerView.layer.cornerRadius = 5
         iconsContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(iconSize + 16)
@@ -77,21 +82,13 @@ extension RoutineDetailViewController {
 //            make.top.equalTo(iconsContainerView.superview!)
             make.left.right.equalTo(iconsContainerView.superview!)
         }
-        
-//        let addIconButton = UIButton(frame: CGRect(x:0, y:0, width: iconSize, height: iconSize))
-//        addIconButton.setImage(UIImage(named: "017-edit"), for: .normal)
-////        addIconButton.maskAsCircle()
-//        userView.addSubview(addIconButton)
-//        addIconButton.snp.makeConstraints { (make) in
-//            make.top.bottom.equalTo(iconsContainerView)
-//            make.right.equalTo(userView).offset(0)
-//        }
+
         
         userView.addSubview(descTextLabelView)
-        descTextLabelView.layer.borderWidth = 1
-        descTextLabelView.layer.borderColor = UIColor.blue.cgColor
+        descTextLabelView.layer.borderWidth = 0.5
+        descTextLabelView.layer.borderColor = UIColor.lightGray.cgColor
         descTextLabelView.snp.makeConstraints { (make) in
-            make.height.equalTo(25)
+            make.height.equalTo(20)
             make.top.equalTo(iconsContainerView.snp.bottom).offset(0)
             make.left.right.equalTo(descTextLabelView.superview!)
         }
@@ -102,45 +99,67 @@ extension RoutineDetailViewController {
         
         // in actions view
         userView.addSubview(actionsView)
-        actionsView.layer.borderWidth = 1
-        actionsView.layer.borderColor = UIColor.purple.cgColor
+        actionsView.layer.borderWidth = 0.5
+        actionsView.layer.borderColor = UIColor.lightGray.cgColor
         actionsView.snp.makeConstraints { (make) in
-            make.top.equalTo(descTextLabelView.snp.bottom).offset(0)
+            make.top.equalTo(descTextLabelView.snp.bottom).offset(15)
             make.left.right.bottom.equalTo(actionsView.superview!)
         }
         
+        actionsView.addSubview(addActionView)
+        addActionView.layer.borderWidth = 1
+        addActionView.layer.borderColor = UIColor.lightGray.cgColor
+        addActionView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(addActionView.superview!)
+            make.height.equalTo(headerHeight)
+        }
         
-        actionsView.addSubview(addActionStackView)
-        //        addActionStackView.layer.borderWidth = 1
-        //        addActionStackView.layer.borderColor = UIColor.orange.cgColor
+        actionTextField.attributedPlaceholder = NSAttributedString(string:"Add a new action", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        addActionView.addSubview(addActionStackView)
         addActionStackView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(addActionStackView.superview!)
+            make.left.equalTo(addActionStackView.superview!).offset(20)
+            make.right.equalTo(addActionStackView.superview!).offset(-20)
+            make.top.bottom.equalTo(addActionStackView.superview!)
         }
         
         // bottom nav
-        actionsView.addSubview(editActionsButton)
-        editActionsButton.layer.borderWidth = 1
-        editActionsButton.layer.borderColor = UIColor.orange.cgColor
-        editActionsButton.snp.makeConstraints { (make) in
-            make.right.equalTo(editActionsButton.superview!).offset(-8)
-            make.bottom.equalTo(editActionsButton.superview!).offset(-8)
+        actionsView.addSubview(editStackView)
+        editStackView.snp.makeConstraints { (make) in
+            make.right.equalTo(editStackView.superview!).offset(-10)
+            make.bottom.equalTo(editStackView.superview!).offset(-10)
         }
         
-        actionsView.addSubview(weatherButton)
-        weatherButton.layer.borderWidth = 1
-        weatherButton.layer.borderColor = UIColor.orange.cgColor
-        weatherButton.snp.makeConstraints { (make) in
-            make.left.equalTo(weatherButton.superview!).offset(8)
-            make.bottom.equalTo(weatherButton.superview!).offset(-8)
+        actionsView.addSubview(weatherStackVIew)
+        weatherStackVIew.snp.makeConstraints { (make) in
+            make.left.equalTo(weatherStackVIew.superview!).offset(10)
+            make.bottom.equalTo(weatherStackVIew.superview!).offset(-10)
         }
+        
+//        actionsView.addSubview(editActionsButton)
+//        editActionsButton.layer.borderWidth = 1
+//        editActionsButton.layer.borderColor = UIColor.orange.cgColor
+        editActionsButton.snp.makeConstraints { (make) in
+            make.right.equalTo(editActionsButton.superview!).offset(-10)
+            make.bottom.equalTo(editActionsButton.superview!).offset(-10)
+        }
+        
+//        actionsView.addSubview(weatherButton)
+//        weatherButton.layer.borderWidth = 1
+//        weatherButton.layer.borderColor = UIColor.orange.cgColor
+//        weatherButton.snp.makeConstraints { (make) in
+//            make.left.equalTo(weatherButton.superview!).offset(10)
+//            make.bottom.equalTo(weatherButton.superview!).offset(-10)
+//        }
         
         actionsView.addSubview(actionsContainerView)
-        actionsContainerView.layer.borderWidth = 2
+        actionsContainerView.layer.borderWidth = 0.5
         actionsContainerView.layer.borderColor = UIColor.red.cgColor
         actionsContainerView.snp.makeConstraints { (make) in
-            make.top.equalTo(addActionStackView.snp.bottom).offset(16)
+            make.top.equalTo(addActionStackView.snp.bottom).offset(10)
             make.left.right.equalTo(actionsContainerView.superview!)
-            make.bottom.equalTo(editActionsButton.snp.top).offset(-8)
+//            make.bottom.equalTo(editActionsButton.snp.top).offset(-15)
+            make.bottom.equalTo(editStackView.snp.top).offset(-10)
         }
     }
 }

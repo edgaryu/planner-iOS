@@ -9,9 +9,12 @@
 import UIKit
 
 class CurrentIconsCollectionViewCell: UICollectionViewCell {
+    
     var iconButton : UIButton?
-//    var delegate : currentIconsDelegate?
     var cellIndex : Int?
+    
+    
+//    var delegate : currentIconsDelegate?
 //    var iconImage : UIImageView?
     
     func setButtonImage(with iconPath: String) {

@@ -14,7 +14,9 @@ class RoutineListViewController: UIViewController, UICollectionViewDelegate, UIC
 
     
     @IBOutlet weak var newRoutineTextField: UITextField!
+    @IBOutlet weak var newRoutineAccButton: UIButton!
     @IBOutlet weak var routinesCollectionView: UICollectionView!
+    
     
     var routines = [Routine]()
     
@@ -32,6 +34,28 @@ class RoutineListViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     // Add new routine
+    @objc func hideNewActionKeyboard() {
+        newRoutineTextField.resignFirstResponder()
+    }
+    
+    func resignNewRoutineTextField() {
+        newRoutineAccButton.setImage(UIImage(named: "menu-add")!, for: .normal)
+        newRoutineTextField.resignFirstResponder()
+        newRoutineAccButton.removeTarget(nil, action: nil, for: .allEvents)
+    }
+    
+    @IBAction func beginAddingNewRoutine(_ sender: UITextField) {
+        newRoutineAccButton.setImage(UIImage(named: "menu-bar")!, for: .normal)
+        newRoutineAccButton.addTarget(self, action: #selector(hideNewActionKeyboard), for: .touchUpInside)
+    }
+    @IBAction func endAddingNewRoutine(_ sender: UITextField) {
+        resignNewRoutineTextField()
+    }
+    
+    @IBAction func routineAccButtonTapped(_ sender: UIButton) {
+        resignNewRoutineTextField()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == newRoutineTextField {
             newRoutineTextField.resignFirstResponder()
@@ -74,11 +98,13 @@ class RoutineListViewController: UIViewController, UICollectionViewDelegate, UIC
         
         newRoutineTextField.delegate = self
         
+        newRoutineTextField.attributedPlaceholder = NSAttributedString(string:"Add a new routine", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
 //        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing)) // create a bat button
 //        navigationItem.leftBarButtonItem = editButton // assign button
     }
 
-    // MARK: - Table view data source
+    // MARK: - Collection view data source
 
     // Collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

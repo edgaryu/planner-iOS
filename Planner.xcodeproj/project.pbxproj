@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		5D3BE267204F1E9B006844B9 /* RoutineAddEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */; };
 		5D411B1B2025951A002DAE02 /* RoutineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */; };
-		5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */; };
-		5D411B1F202D032B002DAE02 /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */; };
+		5D411B1D202599F1002DAE02 /* RoutineActionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1C202599F1002DAE02 /* RoutineActionCollectionViewController.swift */; };
+		5D411B1F202D032B002DAE02 /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D411B1E202D032B002DAE02 /* ActionCollectionViewCell.swift */; };
 		5D5F6F86206F4CC100243D2E /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5F6F85206F4CC100243D2E /* WeatherInfo.swift */; };
 		5D5F6F88206F5DD200243D2E /* WeatherOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5F6F87206F5DD200243D2E /* WeatherOptionsTableViewController.swift */; };
 		5D73717920720716009D47A2 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D73717820720716009D47A2 /* LocationSearchViewController.swift */; };
@@ -56,8 +56,8 @@
 		471A1C6F9B96E112ED0BE636 /* Pods-PlannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlannerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlannerTests/Pods-PlannerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineAddEditTableViewController.swift; sourceTree = "<group>"; };
 		5D411B1A2025951A002DAE02 /* RoutineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailViewController.swift; sourceTree = "<group>"; };
-		5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineActionTableViewController.swift; sourceTree = "<group>"; };
-		5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
+		5D411B1C202599F1002DAE02 /* RoutineActionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineActionCollectionViewController.swift; sourceTree = "<group>"; };
+		5D411B1E202D032B002DAE02 /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D5F6F85206F4CC100243D2E /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		5D5F6F87206F5DD200243D2E /* WeatherOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOptionsTableViewController.swift; sourceTree = "<group>"; };
 		5D73717820720716009D47A2 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
@@ -155,8 +155,8 @@
 				5DC1C8BC2050FC400095C726 /* RoutineDetailViewController+UICustomization.swift */,
 				5D8D6EE3203FC88A00D78333 /* IconsCollectionViewController.swift */,
 				5DC1C8C02058BEB30095C726 /* RoutineEditPopoverViewController.swift */,
-				5D411B1C202599F1002DAE02 /* RoutineActionTableViewController.swift */,
-				5D411B1E202D032B002DAE02 /* ActionTableViewCell.swift */,
+				5D411B1C202599F1002DAE02 /* RoutineActionCollectionViewController.swift */,
+				5D411B1E202D032B002DAE02 /* ActionCollectionViewCell.swift */,
 				5D73717A208086E2009D47A2 /* RoutineListCollectionViewCell.swift */,
 				5D8D6EDD203CEDA500D78333 /* RoutineDetailDataController.swift */,
 				5D3BE266204F1E9B006844B9 /* RoutineAddEditTableViewController.swift */,
@@ -423,7 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D411B1D202599F1002DAE02 /* RoutineActionTableViewController.swift in Sources */,
+				5D411B1D202599F1002DAE02 /* RoutineActionCollectionViewController.swift in Sources */,
 				5D73717B208086E2009D47A2 /* RoutineListCollectionViewCell.swift in Sources */,
 				5DC1C8BF20560A480095C726 /* CurrentIconsCollectionViewCell.swift in Sources */,
 				5D8D6EDE203CEDA500D78333 /* RoutineDetailDataController.swift in Sources */,
@@ -442,7 +442,7 @@
 				5D5F6F86206F4CC100243D2E /* WeatherInfo.swift in Sources */,
 				5DC867FF200C45DC009FF59F /* AppDelegate.swift in Sources */,
 				5DC8681D200C775D009FF59F /* AddActionCell.swift in Sources */,
-				5D411B1F202D032B002DAE02 /* ActionTableViewCell.swift in Sources */,
+				5D411B1F202D032B002DAE02 /* ActionCollectionViewCell.swift in Sources */,
 				5D8D6EE4203FC88A00D78333 /* IconsCollectionViewController.swift in Sources */,
 				5DC86813200C489D009FF59F /* Routine.swift in Sources */,
 				5D81BD1D2034101400937082 /* addIconCollectionViewCell.swift in Sources */,
