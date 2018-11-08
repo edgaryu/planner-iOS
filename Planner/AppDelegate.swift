@@ -9,7 +9,8 @@
 import UIKit
 import GooglePlaces
 
-let googlePlacesAPIKey = "AIzaSyBg94Yavd1ER0HX1CkVWhR1I0aaYboSmfk";
+// Replace API KEY with valid one
+let googlePlacesAPIKey = "";
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
