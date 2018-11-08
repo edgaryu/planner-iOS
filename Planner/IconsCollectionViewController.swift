@@ -90,8 +90,8 @@ class IconsCollectionViewController: UICollectionViewController  {
 
         // Change border of selected / deselected cells
         if cell.cellIndex == selectedIndex {
-            cell.iconButton?.layer.borderColor = UIColor.white.cgColor
-            cell.iconButton?.layer.borderWidth = 7
+            cell.iconButton?.layer.borderColor = UIColor.black.cgColor
+            cell.iconButton?.layer.borderWidth = 4
         } else {
 //            cell.layer.borderColor = UIColor.cgColor
             cell.iconButton?.layer.borderWidth = 0

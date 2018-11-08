@@ -66,7 +66,7 @@ class RoutineDetailViewController: UIViewController, UITextFieldDelegate, Routin
     
     
     @IBOutlet weak var editStackView: UIStackView!
-    @IBOutlet weak var weatherStackVIew: UIStackView!
+    @IBOutlet weak var weatherStackView: UIStackView!
     @IBOutlet weak var weatherButton: UIButton!
     @IBOutlet weak var editActionsButton: UIButton!
     

@@ -22,24 +22,28 @@ extension RoutineDetailViewController {
         // Constraint layouts
         // ---------------------
         
-        self.view.addSubview(bottomBackgroundView)
-//        bottomBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
-        bottomBackgroundView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(0)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(0)
-            make.height.equalTo(self.view.frame.size.height/2)
-        }
+//        self.view.addSubview(bottomBackgroundView)
+////        bottomBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
+//        bottomBackgroundView.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
+//            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(0)
+//            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(0)
+//            make.height.equalTo(self.view.frame.size.height/2)
+//        }
         
         self.view.addSubview(userView)
 //        userView.layer.backgroundColor = UIColor.lightGray.cgColor
 //        userView.layer.borderWidth = 0.5
 //        userView.layer.borderColor = UIColor.lightGray.cgColor
         userView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(15)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(15)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-15)
+//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(15)
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
+//            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(15)
+//            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-15)
+//            make.top.equalTo(self.view.snp.top).offset(15)
+            make.bottom.equalTo(self.view.snp.bottom).offset(0)
+            make.left.equalTo(self.view.snp.left).offset(15)
+            make.right.equalTo(self.view.snp.right).offset(-15)
         }
         
         userView.addSubview(subroutineHeaderView)
@@ -130,27 +134,32 @@ extension RoutineDetailViewController {
             make.bottom.equalTo(editStackView.superview!).offset(-10)
         }
         
-        actionsView.addSubview(weatherStackVIew)
-        weatherStackVIew.snp.makeConstraints { (make) in
-            make.left.equalTo(weatherStackVIew.superview!).offset(10)
-            make.bottom.equalTo(weatherStackVIew.superview!).offset(-10)
+        editActionsButton.snp.makeConstraints{ (make) in
+            make.height.equalTo(25)
+            make.width.equalTo(25)
         }
+        
+        actionsView.addSubview(weatherStackView)
+        weatherStackView.snp.makeConstraints { (make) in
+            make.left.equalTo(weatherStackView.superview!).offset(10)
+            make.bottom.equalTo(weatherStackView.superview!).offset(-10)
+        }
+        
+        weatherButton.snp.makeConstraints{ (make) in
+            make.height.equalTo(25)
+            make.width.equalTo(25)
+        }
+
         
 //        actionsView.addSubview(editActionsButton)
 //        editActionsButton.layer.borderWidth = 1
 //        editActionsButton.layer.borderColor = UIColor.orange.cgColor
-        editActionsButton.snp.makeConstraints { (make) in
-            make.right.equalTo(editActionsButton.superview!).offset(-10)
-            make.bottom.equalTo(editActionsButton.superview!).offset(-10)
-        }
-        
-//        actionsView.addSubview(weatherButton)
-//        weatherButton.layer.borderWidth = 1
-//        weatherButton.layer.borderColor = UIColor.orange.cgColor
-//        weatherButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(weatherButton.superview!).offset(10)
-//            make.bottom.equalTo(weatherButton.superview!).offset(-10)
+//        editActionsButton.snp.makeConstraints { (make) in
+//            make.right.equalTo(editActionsButton.superview!).offset(-10)
+//            make.bottom.equalTo(editActionsButton.superview!).offset(-10)
 //        }
+//
+
         
         actionsView.addSubview(actionsContainerView)
         actionsContainerView.layer.borderWidth = 0.5

@@ -141,6 +141,8 @@ class RoutineWeatherViewController: UIViewController, UICollectionViewDelegate, 
                 self.weatherCollectionView.reloadData()
                 if let locationName = self.weatherOptions.locationName {
                     self.locationNameLabel.text = locationName
+                    self.locationNameLabel.font = self.locationNameLabel.font.withSize(24)
+                    self.locationNameLabel.textColor = UIColor.black
                 }
                 self.checkWeatherCollectionViewVisibile()
                 self.optionUpdatePending = false
@@ -191,6 +193,10 @@ class RoutineWeatherViewController: UIViewController, UICollectionViewDelegate, 
         }
     }
     
+    // ----------------
+    // Configure Weather Cell
+    // ----------------
+    
     private func monthIntToString(_ monthInt: Int) -> String {
         switch(monthInt) {
         case 1: return "Jan"
@@ -213,8 +219,8 @@ class RoutineWeatherViewController: UIViewController, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCollectionViewCell
         
         
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 1
+//        cell.layer.borderColor = UIColor.black.cgColor
+//        cell.layer.borderWidth = 1
         
         guard let weatherResponse = weatherResponse else {
             return cell
@@ -274,18 +280,23 @@ class RoutineWeatherViewController: UIViewController, UICollectionViewDelegate, 
         } else {
 
             let numOfSuggestions = weatherResponse.suggestions!.count
-            let suggestionMargin = 3
-            let suggestionWidth = Int(cell.statusView.frame.width / 3) - suggestionMargin - 2
+            let suggestionMargin = 5
+            let suggestionWidth = Int(cell.statusView.frame.width / 3) - suggestionMargin
             let suggestionHeight = cell.statusView.frame.height
             
             for i in (0 ..< numOfSuggestions) {
                 var thisColor : UIColor
                 let thisX = i * suggestionWidth + i * suggestionMargin
                 
+                // set color of status bars
+                // FF6699, 00CCCC, 99FF00 best
                 switch(i) {
-                    case 0: thisColor = UIColor.red
-                    case 1: thisColor = UIColor.orange
-                    case 2: thisColor = UIColor.green
+                    // best to worst
+                    
+                    case 0: thisColor = UIColor(red:0.60, green:1.00, blue:0.00, alpha:1.0)
+                    case 1: thisColor = UIColor(red:0.00, green:0.80, blue:0.80, alpha:1.0)
+                    case 2: thisColor = UIColor(red:1.00, green:0.40, blue:0.60, alpha:1.0)
+                    
                     default: thisColor = UIColor.black
                 }
                 let thisSuggestion = weatherResponse.suggestions![i]
